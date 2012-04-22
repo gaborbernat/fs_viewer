@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/fs_primeranks_server/fs_primeranks_server.iml" filepath="$PROJECT_DIR$/fs_primeranks_server/fs_primeranks_server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fs_proxy/fs_proxy.iml" filepath="$PROJECT_DIR$/fs_proxy/fs_proxy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fs_replay/fs_replay.iml" filepath="$PROJECT_DIR$/fs_replay/fs_replay.iml" />
+    </modules>
+  </component>
+</project>
+

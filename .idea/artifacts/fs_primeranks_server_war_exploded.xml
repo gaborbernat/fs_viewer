@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="fs_primeranks_server:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/fs_primeranks_server_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="fs_primeranks_server/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="fs_primeranks_server" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="application" name="AppEngine ORM" />
+          <element id="library" level="application" name="AppEngine API" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
