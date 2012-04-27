@@ -5,6 +5,10 @@
  * Time: 6:06 PM
  * To change this template use File | Settings | File Templates.
  */
-public class FlightSession {
+package com.primeranks.net.fs_data;
+
+public class Flight {
+    private int id;
+
 
 }
