@@ -1,34 +1,41 @@
-<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
-  <servlet>
-    <servlet-name>guestbook</servlet-name>
-    <servlet-class>com.google.appengine.demos.jdoexamples.GuestbookServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>namedcounter</servlet-name>
-    <servlet-class>com.google.appengine.demos.jdoexamples.NamedCounterServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>friends</servlet-name>
-    <servlet-class>com.google.appengine.demos.jdoexamples.FriendServlet</servlet-class>
-  </servlet>
-  <servlet>
-    <servlet-name>addressbook</servlet-name>
-    <servlet-class>com.google.appengine.demos.jdoexamples.AddressBookServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>guestbook</servlet-name>
-    <url-pattern>/guestbook</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>namedcounter</servlet-name>
-    <url-pattern>/namedcounter</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>friends</servlet-name>
-    <url-pattern>/friends</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>addressbook</servlet-name>
-    <url-pattern>/addressbook</url-pattern>
-  </servlet-mapping>
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ web.xml ->
+  ~ Copyright (C) 2012-05-01 Gábor Bernát
+  ~ Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
+  ~
+  ~ This program is free software: you can redistribute it and/or modify it under the terms of the
+  ~ GNU General Public License as published by the Free Software Foundation, either version 3 of
+  ~ the License, or at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+  ~ without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+  ~ See the GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License along with this program.
+  ~ If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
+    <!-- Provides support for Guice-based Web applications. -->
+    <listener>
+        <listener-class>net.primeranks.fs_server.FsPrimeranksServerGuiceConfig</listener-class>
+    </listener>
+    <filter>
+        <filter-name>Guice Filter</filter-name>
+        <filter-class>com.google.inject.servlet.GuiceFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Guice Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <!-- End of Juice config-->
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

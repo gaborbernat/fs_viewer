@@ -1,11 +1,28 @@
-package com.primeranks.net.fs_data;
-
-/**
- * Data for a given moment.
- * User: gabor.bernat
- * Date: 4/22/12
- * Time: 7:43 PM
+/*
+ * FlightSnapshot.java ->
+ * Copyright (C) 2012-05-01 Gábor Bernát
+ * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
+ *
+ * This program is free software: you can redistribute it and/or modify it under the terms of the
+ * GNU General Public License as published by the Free Software Foundation, either version 3 of
+ * the License, or at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+ * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with this program.
+ * If not, see <http://www.gnu.org/licenses/>.
  */
+package net.primeranks.fs_data;
+
+import javax.xml.bind.annotation.XmlRootElement;
+
+/*
+    Flight measurement data for a given time slice.
+    Immutable object, use the inner Builder object to create a new instance.
+ */
+@XmlRootElement
 public class FlightSnapshot {
     // Time
     private final long simulationTimeStamp;
@@ -127,6 +144,10 @@ public class FlightSnapshot {
         }
     }
 
+    /*
+       See if any valid data is passed.
+       @return True if all data fields correspond to the default settings.
+    */
     public boolean isDefault() {
         return Builder.TIME_DEFAULT == simulationTimeStamp &&
                 Builder.TIME_DEFAULT == measurementTimeStamp &&
@@ -198,6 +219,10 @@ public class FlightSnapshot {
                 .build();
     }
 
+    /*
+        Transforms the data into a string format.
+        @return The object as a string.
+     */
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
@@ -215,6 +240,11 @@ public class FlightSnapshot {
         return sb.toString();
     }
 
+    /*
+       Check if two instances of the object are the same.
+       This ignores the measurementTimeStamp field.
+       @return True if the two objects are the same, false otherwise.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true; // Same object
@@ -232,6 +262,10 @@ public class FlightSnapshot {
                 !(aircraftTypeName != null ? !aircraftTypeName.equals(that.aircraftTypeName) : that.aircraftTypeName != null);
     }
 
+    /*
+        Generate a hash code from the field members of the objects.
+        The measurementTimeStamp field will not influence the value generated.
+     */
     @Override
     public int hashCode() {
         int result;

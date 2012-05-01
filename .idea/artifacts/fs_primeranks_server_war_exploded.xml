@@ -6,10 +6,14 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="fs_primeranks_server" />
+          <element id="module-output" name="fs_data" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="application" name="AppEngine ORM" />
           <element id="library" level="application" name="AppEngine API" />
+          <element id="library" level="application" name="guice-3.0" />
+          <element id="library" level="application" name="objectify-3.1" />
+          <element id="library" level="application" name="Restful Services - Jersey" />
         </element>
       </element>
     </root>
