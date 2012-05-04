@@ -1,6 +1,6 @@
 /*
  * DaoUser.java ->
- * Copyright (C) 2012-05-01 Gábor Bernát
+ * Copyright (C) 2012-05-04 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -33,14 +33,21 @@ public class DaoUser extends Dao {
         return ofy().get(User.class, id);
     }
 
-    public User findUserByNameAndDomain(String name, String domain) {
-        return ofy().query(User.class).filter("name", name).filter("domain", domain).get();
+    public List<User> findUserByNameAndDomain(String name, String domain) {
+        Query<User> q = ofy().query(User.class);
+        if (name != null && name.length() != 0)
+            q.filter("name", name);
+        if (domain != null && domain.length() != 0)
+            q.filter("domain", domain);
+        return q.list();
     }
 
     public User createUser(User u) {
-        if (findUserByNameAndDomain(u.getName(), u.getDomain()) == null) {
+        List<User> l = findUserByNameAndDomain(u.getName(), u.getDomain());
+        if (l.size() == 0)
             ofy().put(u);
-        }
+        else
+            u = l.get(0);
         return u;
     }
 

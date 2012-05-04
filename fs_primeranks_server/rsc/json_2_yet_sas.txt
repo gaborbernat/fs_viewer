@@ -1,1 +1,5 @@
-{"domain":"sas","id":"1","name":"Yeti"}
+{
+    "domain": "sas",
+    "id": "1",
+    "name": "Yeti"
+}

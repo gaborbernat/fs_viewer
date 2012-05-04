@@ -1,6 +1,6 @@
 /*
  * User.java ->
- * Copyright (C) 2012-05-01 Gábor Bernát
+ * Copyright (C) 2012-05-04 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -17,20 +17,22 @@
 
 package net.primeranks.fs_data;
 
-import javax.jdo.annotations.Element;
+import com.googlecode.objectify.annotation.Indexed;
+
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+
+@XmlRootElement(name = "user")  // For the transport protocol
+@Entity(name = "user")          // for the storage
+@Indexed                      // Make an index for all the fields unless specified not to
 public class User {
-    @Element
     @Id
     private Long id;
     // The username.
-    @Element
     private String name;
     // The domain of the user. If it does not ends as a . something, it suggests a local area usage.
-    @Element
     private String domain;
 
     // JAXB needs this

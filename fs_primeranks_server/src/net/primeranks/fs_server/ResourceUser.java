@@ -1,6 +1,6 @@
 /*
  * ResourceUser.java ->
- * Copyright (C) 2012-05-01 Gábor Bernát
+ * Copyright (C) 2012-05-04 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -23,32 +23,26 @@ import net.primeranks.fs_data.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import javax.xml.bind.JAXBElement;
+import java.util.List;
 
 @Path("/user")
 public class ResourceUser extends ResourceRESTInjectorProvider {
-    @GET
-    @Path("{name}/xml")
-    @Produces(MediaType.TEXT_XML)
-    public User getUserByNameAndDomainInXML(@PathParam("name") String name, @PathParam("domain") String domain) {
-        return dao().findUserByNameAndDomain(name, domain);
-    }
 
     @GET
-    @Path("{name}/json")
-    @Produces("application/json")
-    public User getPlayerByNameInJSON(@PathParam("name") String name, @PathParam("domain") String domain) {
-        User r = dao().findUserByNameAndDomain(name, domain);
-        return r;
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public List<User> getPlayerByNameInJSON(@QueryParam("name") String name, @QueryParam("domain") String domain) {
+        List<User> u = dao().findUserByNameAndDomain(name, domain);
+        return u;
     }
 
     @PUT
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response createUser(JAXBElement<User> user) {
+    @Produces(MediaType.TEXT_PLAIN)
+    public String createUser(JAXBElement<User> user) {
         User u = user.getValue();
-        dao().createUser(u);
-        return Response.created(uriInfo.getAbsolutePath()).build();
+        u = dao().createUser(u);
+        return u.getId().toString();
     }
 
     private DaoUser dao() {
