@@ -1,6 +1,6 @@
 /*
- * Dao.java ->
- * Copyright (C) 2012-05-06 Gábor Bernát
+ * FsProxyModule.java ->
+ * Copyright (C) 2012-05-05 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -15,18 +15,24 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.primeranks.fs_server;
+package fs_proxy;
 
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.util.DAOBase;
-import net.primeranks.fs_data.User;
+import com.google.inject.AbstractModule;
 
-public class Dao extends DAOBase {
-    // Objectify is the simplest convenient interface to the Google App Engine datastore.
-    // At startup register the DAO objects at Objectifies service.
-    static {
-        ObjectifyService.register(User.class);
-//        ObjectifyService.register(FlightSnapshot.class);
-//        ObjectifyService.register(Flight.class);
+/**
+ * Created with IntelliJ IDEA.
+ * User: gabor.bernat
+ * Date: 5/5/12
+ * Time: 8:55 PM
+ * To change this template use File | Settings | File Templates.
+ */
+public class FsProxyModule extends AbstractModule {
+    public FsProxyModule() {
+    }
+
+    @Override
+    public void configure() {
+        bind(FS_Proxy_I.class).to(FS_Proxy_Basic.class);
+        bind(SendData.class).to(ApacheHttpClientRESTConnection.class);
     }
 }

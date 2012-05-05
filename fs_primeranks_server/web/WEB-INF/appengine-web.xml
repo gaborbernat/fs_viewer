@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   ~ appengine-web.xml ->
-  ~ Copyright (C) 2012-05-01 Gábor Bernát
+  ~ Copyright (C) 2012-05-05 Gábor Bernát
   ~ Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
   ~
   ~ This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -17,7 +17,7 @@
   -->
 
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-    <application></application>
+    <application>primeranksfs</application>
     <version>1</version>
 
     <!--

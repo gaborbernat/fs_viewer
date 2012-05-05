@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ strings.xml ->
+  ~ entry_point.xml ->
   ~ Copyright (C) 2012-05-05 Gábor Bernát
   ~ Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
   ~
@@ -16,15 +16,15 @@
   ~ If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<resources>
-    <string name="app_name">FS Replay</string>
-    <string name="errorGetUserList">Error, could not get the user list!</string>
-    <string name="notifyStartGetUserList">Downloading user list from the server.</string>
-    <string name="noMoreHTTPRetry">Won\'t retry</string>
-    <string name="retryHTTPLog">Retrying request...</string>
-    <string name="userSelectedToastText">Getting flights... for</string>
-    <string name="returnedUserCount">Returned %1$d users from the server.</string>
-    <string name="BackToTop">Back to top</string>
-    <string name="name">Name</string>
-    <string name="domain">Domain</string>
-</resources>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <ListView
+            android:id="@android:id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            />
+</LinearLayout>
+

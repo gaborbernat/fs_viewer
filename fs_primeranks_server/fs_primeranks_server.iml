@@ -15,11 +15,13 @@
       </configuration>
       <facet type="google-app-engine" name="Google App Engine">
         <configuration>
+          <password>dfe2dfc3dfc6dfcbdfd8dfd3df8cdfebdfdcdfd8dfc3dfc6</password>
           <files-to-enhance>
             <file path="$MODULE_DIR$/src" />
           </files-to-enhance>
           <run-enhancer-on-make>true</run-enhancer-on-make>
           <sdk-home-path>$APP_ENGINE_SDK_HOME$</sdk-home-path>
+          <email>gabor.bernat@primeranks.net</email>
         </configuration>
       </facet>
     </facet>

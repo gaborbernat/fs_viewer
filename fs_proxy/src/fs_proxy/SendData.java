@@ -1,5 +1,5 @@
 /*
- * Dao.java ->
+ * SendData.java ->
  * Copyright (C) 2012-05-06 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
@@ -15,18 +15,18 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.primeranks.fs_server;
+package fs_proxy;
 
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.util.DAOBase;
+import net.primeranks.fs_data.Flight;
+import net.primeranks.fs_data.FlightSnapshot;
 import net.primeranks.fs_data.User;
 
-public class Dao extends DAOBase {
-    // Objectify is the simplest convenient interface to the Google App Engine datastore.
-    // At startup register the DAO objects at Objectifies service.
-    static {
-        ObjectifyService.register(User.class);
-//        ObjectifyService.register(FlightSnapshot.class);
-//        ObjectifyService.register(Flight.class);
-    }
+public interface SendData {
+    public Long getUserID(User u);
+
+    public Long createUser(User u);
+
+    public Flight createFlight(User u, Flight f);
+
+    public void addFlightSnapshot(Flight f, FlightSnapshot s);
 }

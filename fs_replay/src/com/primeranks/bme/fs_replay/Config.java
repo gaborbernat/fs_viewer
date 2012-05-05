@@ -1,6 +1,6 @@
 /*
- * Dao.java ->
- * Copyright (C) 2012-05-06 Gábor Bernát
+ * Config.java ->
+ * Copyright (C) 2012-05-05 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -15,18 +15,11 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.primeranks.fs_server;
+package com.primeranks.bme.fs_replay;
 
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.util.DAOBase;
-import net.primeranks.fs_data.User;
-
-public class Dao extends DAOBase {
-    // Objectify is the simplest convenient interface to the Google App Engine datastore.
-    // At startup register the DAO objects at Objectifies service.
-    static {
-        ObjectifyService.register(User.class);
-//        ObjectifyService.register(FlightSnapshot.class);
-//        ObjectifyService.register(Flight.class);
-    }
+public final class Config {
+    public static final String FS_PRIMERANKS_API_REST_ENDPOINT = "http://primeranksfs.appspot.com/rest/";
+    public static final String FS_USER_ENTRY = FS_PRIMERANKS_API_REST_ENDPOINT + "user/";
+    public static final String LOG_AS = "FS Replay";
+    public static final String IDENTIFY_CLIENT_AS = LOG_AS + "/1.0";
 }

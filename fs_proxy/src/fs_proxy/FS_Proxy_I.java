@@ -1,5 +1,5 @@
 /*
- * Dao.java ->
+ * FS_Proxy_I.java ->
  * Copyright (C) 2012-05-06 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
@@ -15,18 +15,21 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.primeranks.fs_server;
+package fs_proxy;
 
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.util.DAOBase;
-import net.primeranks.fs_data.User;
+/**
+ * Created with IntelliJ IDEA.
+ * User: gabor.bernat
+ * Date: 5/5/12
+ * Time: 8:58 PM
+ * To change this template use File | Settings | File Templates.
+ */
+public interface FS_Proxy_I {
+    public int getRefreshInterval();
 
-public class Dao extends DAOBase {
-    // Objectify is the simplest convenient interface to the Google App Engine datastore.
-    // At startup register the DAO objects at Objectifies service.
-    static {
-        ObjectifyService.register(User.class);
-//        ObjectifyService.register(FlightSnapshot.class);
-//        ObjectifyService.register(Flight.class);
-    }
+    public void setRefreshInterval(int refreshInterval);
+
+    public void run();
+
+    public void run(int refreshInterval);
 }

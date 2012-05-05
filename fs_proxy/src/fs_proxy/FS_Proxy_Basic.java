@@ -1,6 +1,6 @@
 /*
- * FS_Proxy.java ->
- * Copyright (C) 2012-05-01 Gábor Bernát
+ * FS_Proxy_Basic.java ->
+ * Copyright (C) 2012-05-06 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -20,22 +20,30 @@ package fs_proxy;
 import com.flightsim.fsuipc.FSAircraft;
 import com.flightsim.fsuipc.FSUIPC;
 import com.flightsim.fsuipc.fsuipc_wrapper;
+import net.primeranks.fs_data.Flight;
 import net.primeranks.fs_data.FlightSnapshot;
+import net.primeranks.fs_data.User;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import javax.inject.Inject;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-/**
- * Created with IntelliJ IDEA.
- * User: gabor.bernat
- * Date: 4/22/12
- * Time: 7:59 PM
- * To change this template use File | Settings | File Templates.
- */
-public class FS_Proxy {
+public class FS_Proxy_Basic implements FS_Proxy_I {
+    static Logger log = Logger.getLogger(Config.class.getName());
     private FSUIPC general;
     private FSAircraft aircraft;
     private int refreshInterval;
+    private User user;
+    private Flight flight;
+    private final SendData sendData;
+
+    @Inject
+    FS_Proxy_Basic(SendData s) {
+        sendData = s;
+    }
+
 
     public int getRefreshInterval() {
         return refreshInterval;
@@ -88,23 +96,25 @@ public class FS_Proxy {
 
     ;
 
-    private static String getUserName() {
-        try {
-            return System.getProperty("user.name", "NoUserName") + "@" + InetAddress.getLocalHost().getHostName();
-        } catch (UnknownHostException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+
+    private boolean init() {
+        log.log(Level.FINE, "Starting fs_proxy.");
+        log.log(Level.FINE, "The current class path is (looking for DLL from here): "
+                + new java.io.File(".").getAbsolutePath());
+        log.log(Level.FINE, "Looking for the DLL.");
+
+        user = new User();
+        user.setDomain(Util.getDomain());
+        user.setName(Util.getUserName());
+        log.log(Level.INFO, "Local UserName: " + user.toString());
+
+        user.setId(sendData.getUserID(user));
+        if (user.getId() == null || user.getId().equals(User.INVALID_ID)) {
+            log.log(Level.INFO, "User not found on server. Creating it.");
+            user.setId(sendData.createUser(user));
         }
-        return ";";
-    }
-
-    private int init() {
-        System.out.println("Starting fs_proxy.");
-        System.out.println("The current class path is (looking for DLL from here): " + new java.io.File(".").getAbsolutePath());
-        System.out.println("Looking for the DLL.");
-        System.out.println("UserName:" + getUserName());
-
-        int ret = fsuipc_wrapper.Open(fsuipc_wrapper.SIM_ANY);
-        return ret;
+        log.log(Level.INFO, "Server UserName: " + user.toString());
+        return user.getId() != User.INVALID_ID;
     }
 
     private Object readFromGeneral(FSInformation x) {
@@ -154,28 +164,41 @@ public class FS_Proxy {
     public void run(int refreshInterval) {
         this.refreshInterval = refreshInterval;
 
-        if (0 == init()) {
-            System.out.println("Flight sim not found. Please make sure the Flight Simulator is running and the DLL is in the path.");
+        if (!init()) {
+            log.log(Level.SEVERE, "The initialization failed. Stopping.");
             return;
         }
-        general = new FSUIPC();
-        aircraft = new FSAircraft();
+
         FlightSnapshot current, previous = null, diff;
         int i = 0;
         while (true) {
-            ++i;
-            current = readSnapShot();
-            diff = current.differenceFrom(previous);
-            if (diff != null && !diff.isDefault()) {
-                previous = current;
-                System.out.println("" + i + "->" + diff);
+            // Wait for the FSUIPC to connect
+            while (fsuipc_wrapper.Open(fsuipc_wrapper.SIM_ANY) == 0) {
+                log.log(Level.INFO, new SimpleDateFormat("HH:mm:ss").format(new Date()) +
+                        " FSUIPC not found. Retrying later.");
+                try {
+                    Thread.sleep(5 * this.refreshInterval);
+                } catch (InterruptedException e) {
+                    log.log(Level.SEVERE, "Damn, something when damn wrong: " + e.getMessage());
+                }
             }
+            general = new FSUIPC();
+            aircraft = new FSAircraft();
 
+            while (true) {
+                ++i;
+                current = readSnapShot();
+                diff = current.differenceFrom(previous);
+                if (diff != null && !diff.isDefault()) {
+                    previous = current;
+                    log.log(Level.INFO, "" + i + "->" + diff);
+                }
 
-            try {
-                Thread.sleep(this.refreshInterval);
-            } catch (InterruptedException e) {
-                System.out.println("Damn, something when damn wrong");
+                try {
+                    Thread.sleep(this.refreshInterval);
+                } catch (InterruptedException e) {
+                    log.log(Level.SEVERE, "Damn, something when damn wrong: " + e.getMessage());
+                }
             }
         }
     }

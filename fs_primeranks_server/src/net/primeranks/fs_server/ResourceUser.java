@@ -1,6 +1,6 @@
 /*
  * ResourceUser.java ->
- * Copyright (C) 2012-05-04 Gábor Bernát
+ * Copyright (C) 2012-05-06 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -42,7 +42,7 @@ public class ResourceUser extends ResourceRESTInjectorProvider {
     public String createUser(JAXBElement<User> user) {
         User u = user.getValue();
         u = dao().createUser(u);
-        return u.getId().toString();
+        return u.getId() != User.INVALID_ID ? u.getId().toString() : null;
     }
 
     private DaoUser dao() {

@@ -13,6 +13,7 @@
     <orderEntry type="library" name="guice-3.0" level="application" />
     <orderEntry type="library" name="Restful Services - Jersey" level="application" />
     <orderEntry type="library" name="fsuipc" level="application" />
+    <orderEntry type="library" name="htttpcomponents" level="application" />
   </component>
 </module>
 
