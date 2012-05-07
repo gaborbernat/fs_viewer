@@ -1,6 +1,6 @@
 /*
  * ApacheHttpClientRESTConnection.java ->
- * Copyright (C) 2012-05-06 Gábor Bernát
+ * Copyright (C) 2012-05-07 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -22,7 +22,6 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import net.primeranks.fs_data.Flight;
-import net.primeranks.fs_data.FlightSnapshot;
 import net.primeranks.fs_data.User;
 
 import javax.ws.rs.core.MediaType;
@@ -109,12 +108,23 @@ public class ApacheHttpClientRESTConnection implements SendData {
     }
 
     @Override
-    public Flight createFlight(User u, Flight f) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+    public Flight createFlight(Flight f) {
+        return null;
     }
 
     @Override
-    public void addFlightSnapshot(Flight f, FlightSnapshot s) {
+    public void updateFlight(Flight f) {
         //To change body of implemented methods use File | Settings | File Templates.
     }
+
+    @Override
+    public void updateFlight(Flight f, int last) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void updateFlightMeta(Flight f) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
 }

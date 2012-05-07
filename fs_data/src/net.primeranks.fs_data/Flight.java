@@ -1,6 +1,6 @@
 /*
  * Flight.java ->
- * Copyright (C) 2012-05-01 Gábor Bernát
+ * Copyright (C) 2012-05-07 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -25,12 +25,42 @@
 package net.primeranks.fs_data;
 
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
+@XmlRootElement
 public class Flight {
     private Long id;
+    private long startDate;
+    private long endDate;
+
+    public int getPeriodicity() {
+        return periodicity;
+    }
+
+    public void setPeriodicity(int periodicity) {
+        this.periodicity = periodicity;
+    }
+
+    private int periodicity;
     private List<FlightSnapshot> flightData;
     private User user;
+
+    public long getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(long startDate) {
+        this.startDate = startDate;
+    }
+
+    public long getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(long endDate) {
+        this.endDate = endDate;
+    }
 
     public Long getId() {
         return id;

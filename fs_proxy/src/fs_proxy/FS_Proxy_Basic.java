@@ -27,17 +27,23 @@ import net.primeranks.fs_data.User;
 import javax.inject.Inject;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FS_Proxy_Basic implements FS_Proxy_I {
     static Logger log = Logger.getLogger(Config.class.getName());
+
+    private int refreshInterval;
+    private Flight flight;
+    private User user;
+
+    private final SendData sendData;
     private FSUIPC general;
     private FSAircraft aircraft;
-    private int refreshInterval;
-    private User user;
-    private Flight flight;
-    private final SendData sendData;
+
+    private Timer t;
 
     @Inject
     FS_Proxy_Basic(SendData s) {
@@ -62,13 +68,12 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
         SIMULATOR_ZULU_HOUR(0X023B, 1, Type.BYTE),
         SIMULATOR_ZULU_MINUTE(0X023A, 1, Type.BYTE),
         SIMULATOR_YEAR(0X0240, 2, Type.SHORT),
-        SIMULATOR_DAY_NR_IN_YEAR(0X024E, 2, Type.SHORT);
+        SIMULATOR_DAY_NR_IN_YEAR(0X024E, 2, Type.SHORT),
+        IN_MENU(3365, 1, Type.BYTE); // zero if in game
 
         private enum Type {
             BYTE, SHORT, INT, LONG, DOUBLE, STRING
         }
-
-        ;
 
         private final int offset;
         private final int size;
@@ -94,9 +99,6 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
 
     }
 
-    ;
-
-
     private boolean init() {
         log.log(Level.FINE, "Starting fs_proxy.");
         log.log(Level.FINE, "The current class path is (looking for DLL from here): "
@@ -114,7 +116,8 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
             user.setId(sendData.createUser(user));
         }
         log.log(Level.INFO, "Server UserName: " + user.toString());
-        return user.getId() != User.INVALID_ID;
+
+        return user.getId() != null && !user.getId().equals(User.INVALID_ID);
     }
 
     private Object readFromGeneral(FSInformation x) {
@@ -161,6 +164,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
         run(this.refreshInterval);
     }
 
+    @Override
     public void run(int refreshInterval) {
         this.refreshInterval = refreshInterval;
 
@@ -169,36 +173,63 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
             return;
         }
 
-        FlightSnapshot current, previous = null, diff;
-        int i = 0;
-        while (true) {
-            // Wait for the FSUIPC to connect
-            while (fsuipc_wrapper.Open(fsuipc_wrapper.SIM_ANY) == 0) {
-                log.log(Level.INFO, new SimpleDateFormat("HH:mm:ss").format(new Date()) +
-                        " FSUIPC not found. Retrying later.");
-                try {
-                    Thread.sleep(5 * this.refreshInterval);
-                } catch (InterruptedException e) {
-                    log.log(Level.SEVERE, "Damn, something when damn wrong: " + e.getMessage());
-                }
+        general = new FSUIPC();
+        aircraft = new FSAircraft();
+        t = new Timer();
+
+        tryToConnectToFSUIPC = new TryToConnectToFSUIPC();
+        t.scheduleAtFixedRate(tryToConnectToFSUIPC, 0, refreshInterval);
+        tryToConnectToFSUIPC.cancel();
+    }
+
+    private TryToConnectToFSUIPC tryToConnectToFSUIPC;
+
+    class TryToConnectToFSUIPC extends TimerTask {
+        @Override
+        public void run() {
+            if (fsuipc_wrapper.Open(fsuipc_wrapper.SIM_ANY) != 0) {
+                tryToTakeMeasurement = new TryToTakeMeasurement();
+                t.scheduleAtFixedRate(tryToTakeMeasurement, 0, refreshInterval);
+                tryToConnectToFSUIPC.cancel();
+
+                // Create a new flight
+                flight = new Flight();
+                flight.setUser(user);
+                flight.setStartDate(System.currentTimeMillis() / 1000L);
+                flight.setPeriodicity(refreshInterval);
+                flight = sendData.createFlight(flight);                 // Create it server side
+                log.log(Level.INFO, "Started flight at: " + flight.getStartDate());
+                return;
             }
-            general = new FSUIPC();
-            aircraft = new FSAircraft();
+            log.log(Level.INFO, new SimpleDateFormat("HH:mm:ss").format(new Date()) + "FSUIPC not found. Retrying later.");
+        }
+    }
 
-            while (true) {
-                ++i;
-                current = readSnapShot();
-                diff = current.differenceFrom(previous);
-                if (diff != null && !diff.isDefault()) {
-                    previous = current;
-                    log.log(Level.INFO, "" + i + "->" + diff);
-                }
+    private TryToTakeMeasurement tryToTakeMeasurement;
 
-                try {
-                    Thread.sleep(this.refreshInterval);
-                } catch (InterruptedException e) {
-                    log.log(Level.SEVERE, "Damn, something when damn wrong: " + e.getMessage());
-                }
+    class TryToTakeMeasurement extends TimerTask {
+        FlightSnapshot current, previous = null, diff;
+
+        @Override
+        public void run() {
+            if (fsuipc_wrapper.Open(fsuipc_wrapper.SIM_ANY) == 0) {
+                tryToTakeMeasurement.cancel();
+                tryToConnectToFSUIPC = new TryToConnectToFSUIPC();
+                t.scheduleAtFixedRate(tryToConnectToFSUIPC, 0, refreshInterval);
+                flight.setEndDate(System.currentTimeMillis() / 1000L);
+                sendData.updateFlight(flight);
+                log.log(Level.INFO, "Finished flight at: " + flight.getEndDate());
+
+                return;
+            }
+
+            current = readSnapShot();
+            diff = current.differenceFrom(previous);
+            if (diff != null && !diff.isDefault()) {
+                previous = current;
+                flight.addFlightData(diff);
+                sendData.updateFlight(flight, 1); // update the last entry
+                log.log(Level.INFO, "Measurement: " + diff);
             }
         }
     }
