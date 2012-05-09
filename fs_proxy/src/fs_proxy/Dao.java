@@ -1,6 +1,6 @@
 /*
- * SendData.java ->
- * Copyright (C) 2012-05-07 Gábor Bernát
+ * Dao.java ->
+ * Copyright (C) 2012-05-08 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -18,19 +18,18 @@
 package fs_proxy;
 
 import net.primeranks.fs_data.Flight;
+import net.primeranks.fs_data.FlightSnapshot;
 import net.primeranks.fs_data.User;
 
-public interface SendData {
+public interface Dao {
     public Long getUserID(User u);
 
     public Long createUser(User u);
 
-    public Flight createFlight(Flight f);
+    public Flight addFlight(Flight f);
 
-    public void updateFlight(Flight f);
+    public boolean addSnapshotToFlight(FlightSnapshot f);
 
-    public void updateFlight(Flight f, int last);
-
-    public void updateFlightMeta(Flight f);
+    public int getSnapshotCount(Flight x);
 
 }

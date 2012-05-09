@@ -1,6 +1,6 @@
 /*
- * MainJerseyApplication.java ->
- * Copyright (C) 2012-05-01 Gábor Bernát
+ * JerseyMainApplication.java ->
+ * Copyright (C) 2012-05-09 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -20,10 +20,11 @@ import javax.ws.rs.core.Application;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MainJerseyApplication extends Application {
+public class JerseyMainApplication extends Application {
     public Set<Class<?>> getClasses() {
         Set<Class<?>> s = new HashSet<Class<?>>();
         s.add(ResourceUser.class);
+        s.add(ResourceFlight.class);
         return s;
     }
 }

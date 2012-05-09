@@ -1,6 +1,6 @@
 /*
  * FS_Proxy_Basic.java ->
- * Copyright (C) 2012-05-06 Gábor Bernát
+ * Copyright (C) 2012-05-09 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -25,6 +25,7 @@ import net.primeranks.fs_data.FlightSnapshot;
 import net.primeranks.fs_data.User;
 
 import javax.inject.Inject;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
@@ -39,15 +40,15 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
     private Flight flight;
     private User user;
 
-    private final SendData sendData;
+    private final Dao dao;
     private FSUIPC general;
     private FSAircraft aircraft;
 
     private Timer t;
 
     @Inject
-    FS_Proxy_Basic(SendData s) {
-        sendData = s;
+    FS_Proxy_Basic(Dao s) {
+        dao = s;
     }
 
 
@@ -110,10 +111,10 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
         user.setName(Util.getUserName());
         log.log(Level.INFO, "Local UserName: " + user.toString());
 
-        user.setId(sendData.getUserID(user));
+        user.setId(dao.getUserID(user));
         if (user.getId() == null || user.getId().equals(User.INVALID_ID)) {
             log.log(Level.INFO, "User not found on server. Creating it.");
-            user.setId(sendData.createUser(user));
+            user.setId(dao.createUser(user));
         }
         log.log(Level.INFO, "Server UserName: " + user.toString());
 
@@ -147,9 +148,25 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
     }
 
     private FlightSnapshot readSnapShot() {
+        long simulationTimeStamp = FlightSnapshot.DEFAULT.getSimulationTimeStamp();
+        Short y = (Short) readFromGeneral(FSInformation.SIMULATOR_YEAR);
+        Short d = (Short) readFromGeneral(FSInformation.SIMULATOR_DAY_NR_IN_YEAR);
+        Byte h = (Byte) readFromGeneral(FSInformation.SIMULATOR_ZULU_HOUR);
+        Byte m = (Byte) readFromGeneral(FSInformation.SIMULATOR_ZULU_MINUTE);
+        Byte s = (Byte) readFromGeneral(FSInformation.SIMULATOR_SECOND);
+
+        try {
+            Date x = new SimpleDateFormat("y-D k:m:s z").parse(String.format("%d-%d %d:%d:%d UTC", y, d, h, m, s));
+            simulationTimeStamp = x.getTime();
+        } catch (ParseException e) {
+            log.log(Level.SEVERE, "Reading the simulation timestamp failed:" + e.getMessage());
+        }
+
         return new FlightSnapshot.Builder()
+                // .id() -> Server side generated - irrelevant here
+                .flightId(flight.getId())
                 .measurementTimeStamp(System.currentTimeMillis() / 1000L)
-                .simulationTimeStamp(FlightSnapshot.Builder.TIME_DEFAULT)
+                .simulationTimeStamp(simulationTimeStamp)
                 .aircraftTypeName((String) readFromGeneral(FSInformation.AIRCRAFT_TYPE_NAME))
                 .aircraftCode((String) readFromGeneral(FSInformation.AIRCRAFT_CODE))
                 .altitude(aircraft.Altitude())
@@ -179,7 +196,6 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
 
         tryToConnectToFSUIPC = new TryToConnectToFSUIPC();
         t.scheduleAtFixedRate(tryToConnectToFSUIPC, 0, refreshInterval);
-        tryToConnectToFSUIPC.cancel();
     }
 
     private TryToConnectToFSUIPC tryToConnectToFSUIPC;
@@ -194,14 +210,14 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
 
                 // Create a new flight
                 flight = new Flight();
-                flight.setUser(user);
+                flight.setUserId(user.getId());
                 flight.setStartDate(System.currentTimeMillis() / 1000L);
                 flight.setPeriodicity(refreshInterval);
-                flight = sendData.createFlight(flight);                 // Create it server side
+                flight = dao.addFlight(flight);                 // Create it server side
                 log.log(Level.INFO, "Started flight at: " + flight.getStartDate());
                 return;
             }
-            log.log(Level.INFO, new SimpleDateFormat("HH:mm:ss").format(new Date()) + "FSUIPC not found. Retrying later.");
+            log.log(Level.INFO, new SimpleDateFormat("HH:mm:ss ").format(new Date()) + "FSUIPC not found. Retrying later.");
         }
     }
 
@@ -212,14 +228,17 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
 
         @Override
         public void run() {
+            fsuipc_wrapper.Close();
             if (fsuipc_wrapper.Open(fsuipc_wrapper.SIM_ANY) == 0) {
+                // Start trying to connect
                 tryToTakeMeasurement.cancel();
                 tryToConnectToFSUIPC = new TryToConnectToFSUIPC();
                 t.scheduleAtFixedRate(tryToConnectToFSUIPC, 0, refreshInterval);
-                flight.setEndDate(System.currentTimeMillis() / 1000L);
-                sendData.updateFlight(flight);
-                log.log(Level.INFO, "Finished flight at: " + flight.getEndDate());
 
+                // Update flight details
+                flight.setEndDate(System.currentTimeMillis() / 1000L);
+                dao.addFlight(flight);
+                log.log(Level.INFO, "Finished flight at: " + flight.getEndDate());
                 return;
             }
 
@@ -227,9 +246,9 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
             diff = current.differenceFrom(previous);
             if (diff != null && !diff.isDefault()) {
                 previous = current;
-                flight.addFlightData(diff);
-                sendData.updateFlight(flight, 1); // update the last entry
-                log.log(Level.INFO, "Measurement: " + diff);
+                dao.addSnapshotToFlight(diff);
+                log.log(Level.INFO, "Measurement: " + previous);
+                log.log(Level.INFO, "Diff:        " + diff);
             }
         }
     }

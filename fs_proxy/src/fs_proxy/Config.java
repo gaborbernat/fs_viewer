@@ -1,6 +1,6 @@
 /*
  * Config.java ->
- * Copyright (C) 2012-05-06 Gábor Bernát
+ * Copyright (C) 2012-05-08 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -42,4 +42,7 @@ public class Config {
         else
             BASE_ADDRESS = "localhost:8989";
     }
+
+    public static final String FLIGHT_PATH = "flight";
+    public static final String FLIGHTSNAPSHOT_PATH = "flight/snapshot";
 }

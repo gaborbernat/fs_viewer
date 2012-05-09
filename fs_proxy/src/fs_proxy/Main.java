@@ -1,6 +1,6 @@
 /*
  * Main.java ->
- * Copyright (C) 2012-05-06 Gábor Bernát
+ * Copyright (C) 2012-05-08 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -20,7 +20,6 @@ package fs_proxy;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.LogManager;
@@ -30,13 +29,12 @@ import java.util.logging.LogManager;
  */
 public class Main {
     public static void main(String s[]) {
-        FileInputStream fis = null;
         System.out.println(Util.getWorkingDirectory());
         InputStream is = Main.class.getClassLoader().getResourceAsStream("META-INF/Xlogging.properties");
         try {
             LogManager.getLogManager().readConfiguration(is);
         } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            e.printStackTrace();
         }
 
 

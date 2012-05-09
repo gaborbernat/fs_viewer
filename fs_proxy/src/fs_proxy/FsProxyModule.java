@@ -1,6 +1,6 @@
 /*
  * FsProxyModule.java ->
- * Copyright (C) 2012-05-05 Gábor Bernát
+ * Copyright (C) 2012-05-08 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -33,6 +33,6 @@ public class FsProxyModule extends AbstractModule {
     @Override
     public void configure() {
         bind(FS_Proxy_I.class).to(FS_Proxy_Basic.class);
-        bind(SendData.class).to(ApacheHttpClientRESTConnection.class);
+        bind(Dao.class).to(ApacheHttpClientRESTConnection.class);
     }
 }

@@ -1,6 +1,6 @@
 /*
  * ApacheHttpClientRESTConnection.java ->
- * Copyright (C) 2012-05-07 Gábor Bernát
+ * Copyright (C) 2012-05-09 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -22,10 +22,12 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import net.primeranks.fs_data.Flight;
+import net.primeranks.fs_data.FlightSnapshot;
 import net.primeranks.fs_data.User;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -34,12 +36,14 @@ import java.util.logging.Logger;
 
 import static org.apache.http.client.utils.URIUtils.createURI;
 
-public class ApacheHttpClientRESTConnection implements SendData {
+public class ApacheHttpClientRESTConnection implements Dao {
     static Logger log = Logger.getLogger(ApacheHttpClientRESTConnection.class.getName());
 
     // Maintain a single HTTP client for the entire application
     private final static Client c;
     private final static WebResource userResource;
+    private final static WebResource flightResource;
+    private final static WebResource flightSnapshotResource;
 
     // Configure the HTTP client to handle multiple threaded access
     static { // A static initializer will create the object
@@ -50,6 +54,30 @@ public class ApacheHttpClientRESTConnection implements SendData {
         cc.getProperties().put(ClientConfig.PROPERTY_FOLLOW_REDIRECTS, true);
         c = Client.create(cc);
         userResource = c.resource(getUserURI());
+        flightResource = c.resource(getFlightURI());
+        flightSnapshotResource = c.resource(getFlightSnapshotURI());
+    }
+
+    private static URI getFlightSnapshotURI() {
+        URI x = null;
+        try {
+            x = createURI(Config.PROTOCOL, Config.BASE_ADDRESS, Config.BASE_PORT,
+                    Config.REST_PATH + Config.FLIGHTSNAPSHOT_PATH, null, null);
+        } catch (URISyntaxException e) {
+            log.log(Level.SEVERE, "Failure to form URI: " + e.getMessage());
+        }
+        return x;
+    }
+
+    private static URI getFlightURI() {
+        URI x = null;
+        try {
+            x = createURI(Config.PROTOCOL, Config.BASE_ADDRESS, Config.BASE_PORT,
+                    Config.REST_PATH + Config.FLIGHT_PATH, null, null);
+        } catch (URISyntaxException e) {
+            log.log(Level.SEVERE, "Failure to form URI: " + e.getMessage());
+        }
+        return x;
     }
 
     // Interface to access the application wide HTTP client
@@ -108,23 +136,45 @@ public class ApacheHttpClientRESTConnection implements SendData {
     }
 
     @Override
-    public Flight createFlight(Flight f) {
-        return null;
+    public boolean addSnapshotToFlight(FlightSnapshot f) {
+        ClientResponse resp = null;
+        try {
+            resp = flightSnapshotResource.entity(f, MediaType.APPLICATION_JSON).put(ClientResponse.class);
+        } catch (ClientHandlerException c) {
+            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString() + " As count.");
+        }
+        if (resp.getStatus() != Response.Status.OK.getStatusCode()) {
+            log.log(Level.SEVERE, "Could not add flightSnapshot: " + f.toString());
+            return false;
+        }
+        return true;
     }
 
     @Override
-    public void updateFlight(Flight f) {
-        //To change body of implemented methods use File | Settings | File Templates.
+    public int getSnapshotCount(Flight x) {
+        String resp = null;
+        try {
+            resp = flightSnapshotResource.path("count").entity(x, MediaType.APPLICATION_JSON)
+                    .accept(MediaType.TEXT_PLAIN).get(String.class);
+        } catch (ClientHandlerException c) {
+            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString() + " As count.");
+        }
+
+        return Integer.parseInt(resp);
     }
 
     @Override
-    public void updateFlight(Flight f, int last) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+    public Flight addFlight(Flight f) {
 
-    @Override
-    public void updateFlightMeta(Flight f) {
-        //To change body of implemented methods use File | Settings | File Templates.
-    }
+        String resp = null;
+        try {
+            resp = flightResource.entity(f, MediaType.APPLICATION_JSON).accept(MediaType.TEXT_PLAIN)
+                    .put(String.class);
+        } catch (ClientHandlerException c) {
+            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString());
+        }
 
+        f.setId(resp != null && resp.length() > 0 ? Long.parseLong(resp) : null);
+        return f;
+    }
 }

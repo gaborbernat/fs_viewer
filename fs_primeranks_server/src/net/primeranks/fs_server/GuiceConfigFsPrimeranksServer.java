@@ -1,6 +1,6 @@
 /*
- * FsPrimeranksServerGuiceConfig.java ->
- * Copyright (C) 2012-05-01 Gábor Bernát
+ * GuiceConfigFsPrimeranksServer.java ->
+ * Copyright (C) 2012-05-08 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -31,17 +31,17 @@ import java.util.logging.Logger;
 This module will setup the Jersey-based JAX-RS framework for use with Guide injection.
 This is used to bootstrap Guice when the servet context is initialized.
 */
-public class FsPrimeranksServerGuiceConfig extends GuiceServletContextListener {
-    Logger log = Logger.getLogger(FsPrimeranksServerGuiceConfig.class.getName());
+public class GuiceConfigFsPrimeranksServer extends GuiceServletContextListener {
+    Logger log = Logger.getLogger(GuiceConfigFsPrimeranksServer.class.getName());
 
     @Override
     protected Injector getInjector() {
         final Map<String, String> params = new HashMap<String, String>();
-        // The following line will use MainJerseyApplication.java to define Jersey resources
-        params.put("javax.ws.rs.Application", "net.primeranks.fs_server.MainJerseyApplication");
+        // The following line will use JerseyMainApplication.java to define Jersey resources
+        params.put("javax.ws.rs.Application", "net.primeranks.fs_server.JerseyMainApplication");
 
         return Guice.createInjector(
-                new FsPrimeranksServerGuiceModule(),
+                new GuiceModuleFsPrimeranksServer(),
                 new ServletModule() {
                     @Override
                     protected void configureServlets() {

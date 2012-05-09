@@ -1,6 +1,6 @@
 /*
  * Flight.java ->
- * Copyright (C) 2012-05-07 Gábor Bernát
+ * Copyright (C) 2012-05-08 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -15,52 +15,26 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-/**
- * Created with IntelliJ IDEA.
- * User: gabor.bernat
- * Date: 4/22/12
- * Time: 6:06 PM
- * To change this template use File | Settings | File Templates.
- */
 package net.primeranks.fs_data;
 
+import javax.persistence.Id;
+import javax.xml.bind.annotation.*;
 
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
-
-@XmlRootElement
+@XmlRootElement(name = "flight_meta")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(propOrder = {"id", "userId", "startDate", "endDate", "periodicity"})
 public class Flight {
+    public Flight() {
+    }                // Required for te JAXB Magic
+
+    @Id
+    @XmlAttribute
     private Long id;
+
+    private Long userId;
     private long startDate;
     private long endDate;
-
-    public int getPeriodicity() {
-        return periodicity;
-    }
-
-    public void setPeriodicity(int periodicity) {
-        this.periodicity = periodicity;
-    }
-
     private int periodicity;
-    private List<FlightSnapshot> flightData;
-    private User user;
-
-    public long getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(long startDate) {
-        this.startDate = startDate;
-    }
-
-    public long getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(long endDate) {
-        this.endDate = endDate;
-    }
 
     public Long getId() {
         return id;
@@ -70,27 +44,35 @@ public class Flight {
         this.id = id;
     }
 
-    public List<FlightSnapshot> getFlightData() {
-        return flightData;
+    public long getStartDate() {
+        return this.startDate;
     }
 
-    public void setFlightData(List<FlightSnapshot> flightData) {
-        this.flightData = flightData;
+    public void setStartDate(long startDate) {
+        this.startDate = startDate;
     }
 
-    public void addFlightData(FlightSnapshot... instances) {
-        if (instances != null) {
-            for (FlightSnapshot i : instances) {
-                this.flightData.add(i);
-            }
-        }
+    public long getEndDate() {
+        return this.endDate;
     }
 
-    public User getUser() {
-        return user;
+    public void setEndDate(long endDate) {
+        this.endDate = endDate;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public int getPeriodicity() {
+        return this.periodicity;
+    }
+
+    public void setPeriodicity(int periodicity) {
+        this.periodicity = periodicity;
+    }
+
+    public Long getUserId() {
+        return this.userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

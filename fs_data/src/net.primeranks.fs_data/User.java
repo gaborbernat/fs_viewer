@@ -1,6 +1,6 @@
 /*
  * User.java ->
- * Copyright (C) 2012-05-06 Gábor Bernát
+ * Copyright (C) 2012-05-07 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement(name = "user")  // For the transport protocol
-@Entity(name = "user")          // for the storage
-@Indexed                      // Make an index for all the fields unless specified not to
+@Entity(name = "user")          // For the storage
+@Indexed                        // For the storage -> Make an index for all the fields unless specified not to
 public class User {
     public final static Long INVALID_ID = null;
     @Id

@@ -1,6 +1,6 @@
 /*
  * FlightSnapshot.java ->
- * Copyright (C) 2012-05-07 Gábor Bernát
+ * Copyright (C) 2012-05-09 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -16,60 +16,335 @@
  */
 package net.primeranks.fs_data;
 
+import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /*
     Flight measurement data for a given time slice.
     Immutable object, use the inner Builder object to create a new instance.
  */
 @XmlRootElement
-@XmlJavaTypeAdapter(FlightSnapshotJAXBAdapter.class)
-public class FlightSnapshot extends FlightSnapshotCore {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class FlightSnapshot {
+    @Id
+    @XmlAttribute
+    protected Long id;
+    @XmlAttribute
+    protected Long flightId;
     // Time
-    protected final long simulationTimeStamp = Builder.TIME_DEFAULT;
-    protected final long measurementTimeStamp = Builder.TIME_DEFAULT;
+    @XmlAttribute
+    protected long simulationTimeStamp;
+    @XmlAttribute
+    protected long measurementTimeStamp;
 
     // Aircraft type
-    protected final String aircraftTypeName = null;
-    protected final String aircraftCode = null;
+    protected String aircraftTypeName;
+    protected String aircraftCode;
 
     // Position and orientation
-    protected final double latitude = Builder.LATITUDE_DEFAULT;
-    protected final double longitude = Builder.LONGITUDE_DEFAULT;
-    protected final double heading = Builder.HEADING_DEFAULT;
-    protected final double altitude = Builder.ALTITUDE_DEFAULT;
+    protected double latitude;
+    protected double longitude;
+    protected double heading;
+    protected double altitude;
+    // Speed
+    protected double verticalSpeed;
+
+    public static FlightSnapshot DEFAULT = Builder.DEFAULT.build();
+
+    public FlightSnapshot(Builder b) {
+        setValues(b);
+    }
+
+    public FlightSnapshot() {
+        setValues(Builder.DEFAULT);
+    }
 
 
-    private FlightSnapshot(Builder b) {
-        super(b.simulationTimeStamp, b.measurementTimeStamp, b.aircraftTypeName,
+    private void setValues(Builder b) {
+        setValues(b.id, b.flightId, b.simulationTimeStamp, b.measurementTimeStamp, b.aircraftTypeName,
                 b.aircraftCode, b.latitude, b.longitude, b.heading, b.altitude, b.verticalSpeed);
     }
 
-    public static class Builder {
-        public static final double LATITUDE_DEFAULT = Double.MAX_VALUE;
-        public static final double LONGITUDE_DEFAULT = Double.MAX_VALUE;
-        public static final double HEADING_DEFAULT = Double.MAX_VALUE;
-        public static final double ALTITUDE_DEFAULT = Double.MAX_VALUE;
-        public static final long TIME_DEFAULT = 0;
-        public static final double VERTICAL_SPEED_DEFAULT = Double.MAX_VALUE;
+    private void setValues(Long id, Long flightId, long simulationTimeStamp, long measurementTimeStamp, String aircraftTypeName,
+                           String aircraftCode, double latitude, double longitude,
+                           double heading, double altitude, double verticalSpeed) {
+        this.id = id;
+        this.flightId = flightId;
+        this.simulationTimeStamp = simulationTimeStamp;
+        this.measurementTimeStamp = measurementTimeStamp;
+        this.aircraftTypeName = aircraftTypeName;
+        this.aircraftCode = aircraftCode;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.heading = heading;
+        this.altitude = altitude;
+        this.verticalSpeed = verticalSpeed;
 
+    }
+
+
+    /*
+       See if any valid data is passed.
+       @return True if all data fields correspond to the default settings.
+    */
+    public boolean isDefault() {
+        return this.equals(FlightSnapshot.DEFAULT);
+    }
+
+    private Object checkIfZeroAndApplyDef(Object what, Object to, Object def) {
+        Object r;
+        if (what == null && to == null)
+            r = def;
+        else if (what == null && to != null)
+            r = what;
+        else if (what != null && to == null) {
+            r = def;
+        } else if (what.equals(to)) {
+            r = def;
+        } else r = what;
+
+        return r;
+    }
+
+    /**
+     * Return the different fields between the two objects. Null if they are the same. Measurement time ignored.
+     *
+     * @param x The object to compare with.
+     * @return Returns the different fields in the two objects.
+     */
+    public FlightSnapshot differenceFrom(FlightSnapshot x) {
+        if (x == null)
+            return this;
+        return new Builder()
+                //.measurementTimeStamp(x.measurementTimeStamp == this.measurementTimeStamp ? DEFAULT.measurementTimeStamp : this.measurementTimeStamp)
+                .simulationTimeStamp(x.simulationTimeStamp == this.simulationTimeStamp ? DEFAULT.simulationTimeStamp : this.simulationTimeStamp)
+                .latitude(x.latitude == this.latitude ? DEFAULT.latitude : this.latitude)
+                .longitude(x.longitude == this.longitude ? DEFAULT.longitude : this.longitude)
+                .heading(x.heading == this.heading ? DEFAULT.heading : this.heading)
+                .altitude(x.altitude == this.altitude ? DEFAULT.altitude : this.altitude)
+                .verticalSpeed(x.verticalSpeed == this.verticalSpeed ? DEFAULT.verticalSpeed : this.verticalSpeed)
+
+                .aircraftCode((String) checkIfZeroAndApplyDef(this.aircraftCode, x.aircraftCode, DEFAULT.aircraftCode))
+                .aircraftTypeName((String) checkIfZeroAndApplyDef(this.aircraftTypeName, x.aircraftTypeName, DEFAULT.aircraftTypeName))
+                        // These are not taking part in the difference
+                        //.Id((Long) checkIfZeroAndApplyDef(this.id, x.id, DEFAULT.id))
+                        //.flightId((Long) checkIfZeroAndApplyDef(this.flightId, x.flightId, DEFAULT.flightId))
+                .build();
+
+        // Ignore the measurement timestamp, as this does not provides valuable information, mostly.
+        //.measurementTimeStamp(x.measurementTimeStamp == this.measurementTimeStamp ? Builder.TIME_DEFAULT : this.measurementTimeStamp)
+    }
+
+    /*
+       Transforms the data into a string format.
+       @return The object as a string.
+    */
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("FlightSnapshot{");
+        sb.append("id=").append(id);
+        sb.append(", flightId=").append(flightId);
+        sb.append(", simulationTimeStamp=").append(simulationTimeStamp);
+        sb.append(", measurementTimeStamp=").append(measurementTimeStamp);
+        sb.append(", aircraftTypeName='").append(aircraftTypeName).append('\'');
+        sb.append(", aircraftCode='").append(aircraftCode).append('\'');
+        sb.append(", latitude=").append(latitude);
+        sb.append(", longitude=").append(longitude);
+        sb.append(", heading=").append(heading);
+        sb.append(", altitude=").append(altitude);
+        sb.append(", verticalSpeed=").append(verticalSpeed);
+        sb.append('}');
+        return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        FlightSnapshot that = (FlightSnapshot) o;
+
+        if (Double.compare(that.altitude, altitude) != 0) return false;
+        if (Double.compare(that.heading, heading) != 0) return false;
+        if (Double.compare(that.latitude, latitude) != 0) return false;
+        if (Double.compare(that.longitude, longitude) != 0) return false;
+        if (simulationTimeStamp != that.simulationTimeStamp) return false;
+        if (Double.compare(that.verticalSpeed, verticalSpeed) != 0) return false;
+        if (aircraftCode != null ? !aircraftCode.equals(that.aircraftCode) : that.aircraftCode != null) return false;
+        if (aircraftTypeName != null ? !aircraftTypeName.equals(that.aircraftTypeName) : that.aircraftTypeName != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = (int) (simulationTimeStamp ^ (simulationTimeStamp >>> 32));
+        result = 31 * result + (aircraftTypeName != null ? aircraftTypeName.hashCode() : 0);
+        result = 31 * result + (aircraftCode != null ? aircraftCode.hashCode() : 0);
+        temp = latitude != +0.0d ? Double.doubleToLongBits(latitude) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = longitude != +0.0d ? Double.doubleToLongBits(longitude) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = heading != +0.0d ? Double.doubleToLongBits(heading) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = altitude != +0.0d ? Double.doubleToLongBits(altitude) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = verticalSpeed != +0.0d ? Double.doubleToLongBits(verticalSpeed) : 0L;
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getFlightId() {
+        return flightId;
+    }
+
+    public void setFlightId(Long flightId) {
+        this.flightId = flightId;
+    }
+
+    public long getSimulationTimeStamp() {
+        return simulationTimeStamp;
+    }
+
+    public void setSimulationTimeStamp(long simulationTimeStamp) {
+        this.simulationTimeStamp = simulationTimeStamp;
+    }
+
+    public long getMeasurementTimeStamp() {
+        return measurementTimeStamp;
+    }
+
+    public void setMeasurementTimeStamp(long measurementTimeStamp) {
+        this.measurementTimeStamp = measurementTimeStamp;
+    }
+
+    public String getAircraftTypeName() {
+        return aircraftTypeName;
+    }
+
+    public void setAircraftTypeName(String aircraftTypeName) {
+        this.aircraftTypeName = aircraftTypeName;
+    }
+
+    public String getAircraftCode() {
+        return aircraftCode;
+    }
+
+    public void setAircraftCode(String aircraftCode) {
+        this.aircraftCode = aircraftCode;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getHeading() {
+        return heading;
+    }
+
+    public void setHeading(double heading) {
+        this.heading = heading;
+    }
+
+    public double getAltitude() {
+        return altitude;
+    }
+
+    public void setAltitude(double altitude) {
+        this.altitude = altitude;
+    }
+
+    public double getVerticalSpeed() {
+        return verticalSpeed;
+    }
+
+    public void setVerticalSpeed(double verticalSpeed) {
+        this.verticalSpeed = verticalSpeed;
+    }
+
+    public static class Builder {
+        public static Builder DEFAULT;
+
+        static {
+            DEFAULT = new Builder(true);  // create
+
+            DEFAULT.id = null;        // set
+            DEFAULT.flightId = null;
+
+            DEFAULT.simulationTimeStamp = 0;
+            DEFAULT.measurementTimeStamp = 0;
+            // Aircraft type
+            DEFAULT.aircraftTypeName = null;
+            DEFAULT.aircraftCode = null;
+            DEFAULT.latitude = Double.MAX_VALUE;
+            DEFAULT.longitude = Double.MAX_VALUE;
+            DEFAULT.heading = Double.MAX_VALUE;
+            DEFAULT.altitude = Double.MAX_VALUE;
+            DEFAULT.verticalSpeed = Double.MAX_VALUE;
+        }
+
+        public Long id;
+        public Long flightId;
         // Time
-        public long simulationTimeStamp = TIME_DEFAULT;
-        public long measurementTimeStamp = TIME_DEFAULT;
+        public long simulationTimeStamp;
+        public long measurementTimeStamp;
 
         // Aircraft type
-        private String aircraftTypeName = null;
-        private String aircraftCode = null;
+        private String aircraftTypeName;
+        private String aircraftCode;
 
         // Position and orientation
-        private double latitude = LATITUDE_DEFAULT;
-        private double longitude = LONGITUDE_DEFAULT;
-        private double heading = HEADING_DEFAULT;
-        private double altitude = ALTITUDE_DEFAULT;
+        private double latitude;
+        private double longitude;
+        private double heading;
+        private double altitude;
 
         // Speed
-        private double verticalSpeed = VERTICAL_SPEED_DEFAULT;
+        private double verticalSpeed;
+
+        public Builder() {
+            id = DEFAULT.id;
+            flightId = DEFAULT.flightId;
+            simulationTimeStamp = DEFAULT.simulationTimeStamp;
+            measurementTimeStamp = DEFAULT.measurementTimeStamp;
+            aircraftTypeName = DEFAULT.aircraftTypeName;
+            aircraftCode = DEFAULT.aircraftCode;
+            latitude = DEFAULT.latitude;
+            longitude = DEFAULT.longitude;
+            heading = DEFAULT.heading;
+            altitude = DEFAULT.altitude;
+            verticalSpeed = DEFAULT.verticalSpeed;
+        }
+
+        private Builder(boolean noInit) {
+        }
 
         public Builder simulationTimeStamp(long simulationTimeStamp) {
             this.simulationTimeStamp = simulationTimeStamp;
@@ -116,6 +391,16 @@ public class FlightSnapshot extends FlightSnapshotCore {
             return this;
         }
 
+        public Builder flightId(Long flightId) {
+            this.flightId = flightId;
+            return this;
+        }
+
+        public Builder Id(Long id) {
+            this.id = id;
+            return this;
+        }
+
         /**
          * Build a Flightsnapshot object.
          *
@@ -123,92 +408,10 @@ public class FlightSnapshot extends FlightSnapshotCore {
          */
         public FlightSnapshot build() {
             // Avoid Object creation if
-            if (TIME_DEFAULT == simulationTimeStamp &&
-                    TIME_DEFAULT == measurementTimeStamp &&
-                    null == aircraftCode &&
-                    null == aircraftTypeName &&
-                    ALTITUDE_DEFAULT == altitude &&
-                    LONGITUDE_DEFAULT == longitude &&
-                    LATITUDE_DEFAULT == latitude &&
-                    VERTICAL_SPEED_DEFAULT == verticalSpeed &&
-                    HEADING_DEFAULT == heading)
+            FlightSnapshot x = new FlightSnapshot(this);
+            if (x.isDefault())
                 return null;
-            return new FlightSnapshot(this);
+            else return x;
         }
-    }
-
-    /*
-       See if any valid data is passed.
-       @return True if all data fields correspond to the default settings.
-    */
-    public boolean isDefault() {
-        return Builder.TIME_DEFAULT == simulationTimeStamp &&
-                Builder.TIME_DEFAULT == measurementTimeStamp &&
-                null == aircraftCode &&
-                null == aircraftTypeName &&
-                Builder.ALTITUDE_DEFAULT == altitude &&
-                Builder.LONGITUDE_DEFAULT == longitude &&
-                Builder.LATITUDE_DEFAULT == latitude &&
-                Builder.VERTICAL_SPEED_DEFAULT == verticalSpeed &&
-                Builder.HEADING_DEFAULT == heading;
-    }
-
-    public long simulationTimeStamp() {
-        return simulationTimeStamp;
-    }
-
-    public long measurementTimeStamp() {
-        return measurementTimeStamp;
-    }
-
-    public String aircraftTypeName() {
-        return aircraftTypeName;
-    }
-
-    public String aircraftCode() {
-        return aircraftCode;
-    }
-
-    public double latitude() {
-        return latitude;
-    }
-
-    public double longitude() {
-        return longitude;
-    }
-
-    public double heading() {
-        return heading;
-    }
-
-    public double altitude() {
-        return altitude;
-    }
-
-    public double verticalSpeed() {
-        return verticalSpeed;
-    }
-
-    /**
-     * Return the different fields between the two objects. Null if they are the same. Measurement time ignored.
-     *
-     * @param x The object to compare with.
-     * @return Returns the different fields in the two objects.
-     */
-    public FlightSnapshot differenceFrom(FlightSnapshot x) {
-        if (x == null)
-            return this;
-        return new Builder()
-                .simulationTimeStamp(x.simulationTimeStamp == this.simulationTimeStamp ? Builder.TIME_DEFAULT : this.simulationTimeStamp)
-                        // Ignore the measurement timestamp, as this does not provides valuable information, mostly.
-                        //.measurementTimeStamp(x.measurementTimeStamp == this.measurementTimeStamp ? Builder.TIME_DEFAULT : this.measurementTimeStamp)
-                .aircraftCode(x.aircraftCode.equals(this.aircraftCode) ? null : this.aircraftCode)
-                .aircraftTypeName(x.aircraftTypeName.equals(this.aircraftTypeName) ? null : this.aircraftTypeName)
-                .latitude(x.altitude == this.altitude ? Builder.LATITUDE_DEFAULT : this.altitude)
-                .longitude(x.longitude == this.longitude ? Builder.LONGITUDE_DEFAULT : this.longitude)
-                .heading(x.heading == this.heading ? Builder.HEADING_DEFAULT : this.heading)
-                .altitude(x.altitude == this.altitude ? Builder.ALTITUDE_DEFAULT : this.altitude)
-                .verticalSpeed(x.verticalSpeed == this.verticalSpeed ? Builder.VERTICAL_SPEED_DEFAULT : this.verticalSpeed)
-                .build();
     }
 }

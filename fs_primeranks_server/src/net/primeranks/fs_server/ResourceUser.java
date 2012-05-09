@@ -1,6 +1,6 @@
 /*
  * ResourceUser.java ->
- * Copyright (C) 2012-05-06 Gábor Bernát
+ * Copyright (C) 2012-05-09 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -26,8 +26,8 @@ import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBElement;
 import java.util.List;
 
-@Path("/user")
-public class ResourceUser extends ResourceRESTInjectorProvider {
+@Path("user/")
+public class ResourceUser extends Resource_RESTInjectorProvider {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

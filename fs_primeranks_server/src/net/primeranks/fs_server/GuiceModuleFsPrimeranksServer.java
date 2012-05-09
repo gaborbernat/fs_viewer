@@ -1,6 +1,6 @@
 /*
- * ResourceRESTInjectorProvider.java ->
- * Copyright (C) 2012-05-01 Gábor Bernát
+ * GuiceModuleFsPrimeranksServer.java ->
+ * Copyright (C) 2012-05-08 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -14,27 +14,23 @@
  * You should have received a copy of the GNU General Public License along with this program.
  * If not, see <http://www.gnu.org/licenses/>.
  */
-
 package net.primeranks.fs_server;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import com.google.inject.AbstractModule;
+import com.google.inject.Singleton;
+import com.google.inject.name.Names;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.UriInfo;
+public class GuiceModuleFsPrimeranksServer extends AbstractModule {
+    public GuiceModuleFsPrimeranksServer() {
+    }
 
-public class ResourceRESTInjectorProvider {
-    protected Injector injector;
-
-    @Context
-    protected UriInfo uriInfo;
-
-    @Context
-    protected Request request;
-
-    protected Injector getInjectorInstance() {
-        if (injector == null) injector = Guice.createInjector(new FsPrimeranksServerGuiceModule());
-        return injector;
+    @Override
+    public void configure() {
+        bind(Dao.class).annotatedWith(Names.named("objectify.dao.User"))
+                .to(DaoUser.class).in(Singleton.class);
+        bind(Dao.class).annotatedWith(Names.named("objectify.dao.Flight"))
+                .to(DaoFlight.class).in(Singleton.class);
+        bind(Dao.class).annotatedWith(Names.named("objectify.dao.FlightSnapshot"))
+                .to(DaoFlightSnapshot.class).in(Singleton.class);
     }
 }
