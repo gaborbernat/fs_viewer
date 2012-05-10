@@ -1,6 +1,6 @@
 /*
  * Config.java ->
- * Copyright (C) 2012-05-08 Gábor Bernát
+ * Copyright (C) 2012-05-10 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -17,16 +17,11 @@
 
 package fs_proxy;
 
+import javax.ws.rs.core.MediaType;
 import java.util.logging.Logger;
 
-/**
- * Created with IntelliJ IDEA.
- * User: gabor.bernat
- * Date: 5/5/12
- * Time: 8:22 PM
- * To change this template use File | Settings | File Templates.
- */
 public class Config {
+    public static final String TRANSPORT_FORMAT = MediaType.APPLICATION_JSON;
     static Logger log = Logger.getLogger(Config.class.getName());
     public final static String PROTOCOL = "http";
     public final static String BASE_ADDRESS;
@@ -37,8 +32,8 @@ public class Config {
     public static final String USER_PATH = "user/";
 
     static {
-        if (false)
-            BASE_ADDRESS = "www.primeranksfs.appspot.com/";
+        if (true)
+            BASE_ADDRESS = "www.primeranksfs.appspot.com";
         else
             BASE_ADDRESS = "localhost:8989";
     }

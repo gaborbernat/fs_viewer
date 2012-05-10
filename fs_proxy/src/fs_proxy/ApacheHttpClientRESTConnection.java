@@ -1,6 +1,6 @@
 /*
  * ApacheHttpClientRESTConnection.java ->
- * Copyright (C) 2012-05-09 Gábor Bernát
+ * Copyright (C) 2012-05-10 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -21,9 +21,9 @@ import com.sun.jersey.api.client.*;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-import net.primeranks.fs_data.Flight;
-import net.primeranks.fs_data.FlightSnapshot;
-import net.primeranks.fs_data.User;
+import fs_data.Flight;
+import fs_data.FlightSnapshot;
+import fs_data.User;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -52,10 +52,11 @@ public class ApacheHttpClientRESTConnection implements Dao {
         cc.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, 5000);
         cc.getProperties().put(ClientConfig.PROPERTY_THREADPOOL_SIZE, 5);
         cc.getProperties().put(ClientConfig.PROPERTY_FOLLOW_REDIRECTS, true);
+
         c = Client.create(cc);
-        userResource = c.resource(getUserURI());
-        flightResource = c.resource(getFlightURI());
-        flightSnapshotResource = c.resource(getFlightSnapshotURI());
+        flightResource = getHttpClient().resource(getFlightURI());
+        flightSnapshotResource = getHttpClient().resource(getFlightSnapshotURI());
+        userResource = getHttpClient().resource(getUserURI());
     }
 
     private static URI getFlightSnapshotURI() {
@@ -104,11 +105,11 @@ public class ApacheHttpClientRESTConnection implements Dao {
         p.add("domain", u.getDomain());
         List<User> resp = null;
         try {
-            resp = userResource.queryParams(p).accept(MediaType.APPLICATION_JSON)
+            resp = userResource.queryParams(p).accept(Config.TRANSPORT_FORMAT)
                     .get(new GenericType<List<User>>() {
                     });
         } catch (ClientHandlerException c) {
-            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString());
+            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString() + " " + c.getMessage());
         }
 
         if (resp != null && resp.size() != 0) {
@@ -119,12 +120,11 @@ public class ApacheHttpClientRESTConnection implements Dao {
 
     @Override
     public Long createUser(User u) {
-        Long r = User.INVALID_ID;
         ClientResponse x = null;
         try {
-            x = userResource.accept(MediaType.TEXT_PLAIN).type(MediaType.APPLICATION_JSON).entity(u).put(ClientResponse.class);
+            x = userResource.accept(MediaType.TEXT_PLAIN).type(Config.TRANSPORT_FORMAT).entity(u).put(ClientResponse.class);
         } catch (ClientHandlerException c) {
-            log.log(Level.SEVERE, "Failed to connect to the URI. PUT: " + userResource.getURI().toString());
+            log.log(Level.SEVERE, "Failed to connect to the URI. PUT: " + userResource.getURI().toString() + " " + c.getMessage());
         }
 
         if (x != null && x.getClientResponseStatus() == ClientResponse.Status.OK) {
@@ -139,11 +139,12 @@ public class ApacheHttpClientRESTConnection implements Dao {
     public boolean addSnapshotToFlight(FlightSnapshot f) {
         ClientResponse resp = null;
         try {
-            resp = flightSnapshotResource.entity(f, MediaType.APPLICATION_JSON).put(ClientResponse.class);
+            resp = flightSnapshotResource.entity(f, Config.TRANSPORT_FORMAT).put(ClientResponse.class);
         } catch (ClientHandlerException c) {
-            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString() + " As count.");
+            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString()
+                    + " " + c.getMessage());
         }
-        if (resp.getStatus() != Response.Status.OK.getStatusCode()) {
+        if (Response.Status.fromStatusCode(resp.getStatus()).getFamily() != Response.Status.Family.SUCCESSFUL) {
             log.log(Level.SEVERE, "Could not add flightSnapshot: " + f.toString());
             return false;
         }
@@ -154,10 +155,10 @@ public class ApacheHttpClientRESTConnection implements Dao {
     public int getSnapshotCount(Flight x) {
         String resp = null;
         try {
-            resp = flightSnapshotResource.path("count").entity(x, MediaType.APPLICATION_JSON)
+            resp = flightSnapshotResource.path("count").entity(x, Config.TRANSPORT_FORMAT)
                     .accept(MediaType.TEXT_PLAIN).get(String.class);
         } catch (ClientHandlerException c) {
-            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString() + " As count.");
+            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString() + " " + c.getMessage());
         }
 
         return Integer.parseInt(resp);
@@ -168,10 +169,10 @@ public class ApacheHttpClientRESTConnection implements Dao {
 
         String resp = null;
         try {
-            resp = flightResource.entity(f, MediaType.APPLICATION_JSON).accept(MediaType.TEXT_PLAIN)
+            resp = flightResource.entity(f, Config.TRANSPORT_FORMAT).accept(MediaType.TEXT_PLAIN)
                     .put(String.class);
         } catch (ClientHandlerException c) {
-            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString());
+            log.log(Level.SEVERE, "Failed to connect to the URI. GET: " + userResource.getURI().toString() + " " + c.getMessage());
         }
 
         f.setId(resp != null && resp.length() > 0 ? Long.parseLong(resp) : null);

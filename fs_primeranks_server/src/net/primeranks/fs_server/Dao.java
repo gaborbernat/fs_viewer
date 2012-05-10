@@ -1,6 +1,6 @@
 /*
  * Dao.java ->
- * Copyright (C) 2012-05-08 Gábor Bernát
+ * Copyright (C) 2012-05-10 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -19,9 +19,9 @@ package net.primeranks.fs_server;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
-import net.primeranks.fs_data.Flight;
-import net.primeranks.fs_data.FlightSnapshot;
-import net.primeranks.fs_data.User;
+import fs_data.Flight;
+import fs_data.FlightSnapshot;
+import fs_data.User;
 
 public class Dao extends DAOBase {
     // Objectify is the simplest convenient interface to the Google App Engine datastore.

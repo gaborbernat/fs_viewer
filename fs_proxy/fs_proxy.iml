@@ -9,11 +9,14 @@
     </content>
     <orderEntry type="jdk" jdkName="1.6 X86" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="fs_data" />
     <orderEntry type="library" name="guice-3.0" level="application" />
-    <orderEntry type="library" name="Restful Services - Jersey" level="application" />
     <orderEntry type="library" name="fsuipc" level="application" />
+    <orderEntry type="library" name="objectify-3.1" level="application" />
     <orderEntry type="library" name="htttpcomponents" level="application" />
+    <orderEntry type="module" module-name="fs_data" />
+    <orderEntry type="library" name="jersey" level="application" />
+    <orderEntry type="library" name="Java 6 EE" level="application" />
+    <orderEntry type="library" name="Aspect-Oriented Programming (AOP) Alliance" level="application" />
   </component>
 </module>
 

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="fs_primeranks_server:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/fs_primeranks_server_war_exploded</output-path>
+  <artifact type="exploded-war" name="fs_primeranks_server:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/fs_primeranks_server_war</output-path>
     <root id="root">
       <element id="javaee-facet-resources" facet="fs_primeranks_server/web/Web" />
       <element id="directory" name="WEB-INF">
@@ -13,7 +13,8 @@
           <element id="library" level="application" name="AppEngine API" />
           <element id="library" level="application" name="guice-3.0" />
           <element id="library" level="application" name="objectify-3.1" />
-          <element id="library" level="application" name="Restful Services - Jersey" />
+          <element id="library" level="application" name="jersey" />
+          <element id="library" level="application" name="Aspect-Oriented Programming (AOP) Alliance" />
         </element>
       </element>
     </root>

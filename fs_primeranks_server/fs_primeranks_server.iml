@@ -36,11 +36,13 @@
     <orderEntry type="library" scope="PROVIDED" name="AppEngine Dev 1.2.6" level="application_server_libraries" />
     <orderEntry type="library" name="AppEngine ORM" level="application" />
     <orderEntry type="library" name="AppEngine API" level="application" />
-    <orderEntry type="module" module-name="fs_data" />
     <orderEntry type="library" name="guice-3.0" level="application" />
-    <orderEntry type="library" name="Restful Services - Jersey" level="application" />
     <orderEntry type="library" name="objectify-3.1" level="application" />
     <orderEntry type="library" scope="TEST" name="junit-4.10" level="application" />
+    <orderEntry type="module" module-name="fs_data" />
+    <orderEntry type="library" name="jersey" level="application" />
+    <orderEntry type="library" name="Java 6 EE" level="application" />
+    <orderEntry type="library" name="Aspect-Oriented Programming (AOP) Alliance" level="application" />
   </component>
 </module>
 

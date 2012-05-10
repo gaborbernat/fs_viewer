@@ -1,6 +1,6 @@
 /*
  * FS_Proxy_Basic.java ->
- * Copyright (C) 2012-05-09 Gábor Bernát
+ * Copyright (C) 2012-05-10 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -20,9 +20,9 @@ package fs_proxy;
 import com.flightsim.fsuipc.FSAircraft;
 import com.flightsim.fsuipc.FSUIPC;
 import com.flightsim.fsuipc.fsuipc_wrapper;
-import net.primeranks.fs_data.Flight;
-import net.primeranks.fs_data.FlightSnapshot;
-import net.primeranks.fs_data.User;
+import fs_data.Flight;
+import fs_data.FlightSnapshot;
+import fs_data.User;
 
 import javax.inject.Inject;
 import java.text.ParseException;
@@ -35,6 +35,7 @@ import java.util.logging.Logger;
 
 public class FS_Proxy_Basic implements FS_Proxy_I {
     static Logger log = Logger.getLogger(Config.class.getName());
+    static Long ZERO = new Long(0);
 
     private int refreshInterval;
     private Flight flight;
@@ -67,9 +68,9 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
         SIMULATOR_LOCAL_MINUTE(0X0239, 1, Type.BYTE),
         SIMULATOR_SECOND(0X023A, 1, Type.BYTE),
         SIMULATOR_ZULU_HOUR(0X023B, 1, Type.BYTE),
-        SIMULATOR_ZULU_MINUTE(0X023A, 1, Type.BYTE),
+        SIMULATOR_ZULU_MINUTE(0X023C, 1, Type.BYTE),
         SIMULATOR_YEAR(0X0240, 2, Type.SHORT),
-        SIMULATOR_DAY_NR_IN_YEAR(0X024E, 2, Type.SHORT),
+        SIMULATOR_DAY_NR_IN_YEAR(0X023E, 2, Type.SHORT),
         IN_MENU(3365, 1, Type.BYTE); // zero if in game
 
         private enum Type {
@@ -148,7 +149,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
     }
 
     private FlightSnapshot readSnapShot() {
-        long simulationTimeStamp = FlightSnapshot.DEFAULT.getSimulationTimeStamp();
+        Long simulationTimeStamp = FlightSnapshot.DEFAULT.getSimulationTimeStamp();
         Short y = (Short) readFromGeneral(FSInformation.SIMULATOR_YEAR);
         Short d = (Short) readFromGeneral(FSInformation.SIMULATOR_DAY_NR_IN_YEAR);
         Byte h = (Byte) readFromGeneral(FSInformation.SIMULATOR_ZULU_HOUR);
@@ -156,7 +157,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
         Byte s = (Byte) readFromGeneral(FSInformation.SIMULATOR_SECOND);
 
         try {
-            Date x = new SimpleDateFormat("y-D k:m:s z").parse(String.format("%d-%d %d:%d:%d UTC", y, d, h, m, s));
+            Date x = new SimpleDateFormat("y-D k:m:s z").parse(String.format("%d-%d %d:%d:%d UTC", y, d - 1, h, m, s));
             simulationTimeStamp = x.getTime();
         } catch (ParseException e) {
             log.log(Level.SEVERE, "Reading the simulation timestamp failed:" + e.getMessage());
@@ -165,7 +166,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
         return new FlightSnapshot.Builder()
                 // .id() -> Server side generated - irrelevant here
                 .flightId(flight.getId())
-                .measurementTimeStamp(System.currentTimeMillis() / 1000L)
+                .measurementTimeStamp(System.currentTimeMillis())
                 .simulationTimeStamp(simulationTimeStamp)
                 .aircraftTypeName((String) readFromGeneral(FSInformation.AIRCRAFT_TYPE_NAME))
                 .aircraftCode((String) readFromGeneral(FSInformation.AIRCRAFT_CODE))
@@ -211,7 +212,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
                 // Create a new flight
                 flight = new Flight();
                 flight.setUserId(user.getId());
-                flight.setStartDate(System.currentTimeMillis() / 1000L);
+                flight.setStartDate(System.currentTimeMillis());
                 flight.setPeriodicity(refreshInterval);
                 flight = dao.addFlight(flight);                 // Create it server side
                 log.log(Level.INFO, "Started flight at: " + flight.getStartDate());
@@ -224,7 +225,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
     private TryToTakeMeasurement tryToTakeMeasurement;
 
     class TryToTakeMeasurement extends TimerTask {
-        FlightSnapshot current, previous = null, diff;
+        FlightSnapshot current, previous = FlightSnapshot.DEFAULT, diff;
 
         @Override
         public void run() {
@@ -236,7 +237,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
                 t.scheduleAtFixedRate(tryToConnectToFSUIPC, 0, refreshInterval);
 
                 // Update flight details
-                flight.setEndDate(System.currentTimeMillis() / 1000L);
+                flight.setEndDate(System.currentTimeMillis());
                 dao.addFlight(flight);
                 log.log(Level.INFO, "Finished flight at: " + flight.getEndDate());
                 return;
@@ -244,12 +245,16 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
 
             current = readSnapShot();
             diff = current.differenceFrom(previous);
-            if (diff != null && !diff.isDefault()) {
-                previous = current;
+            if (diff != null && !diff.isDefault() &&
+                    !current.getSimulationTimeStamp().equals(previous.getSimulationTimeStamp())
+                    && diff.getSimulationTimeStamp().compareTo(ZERO) > 0) {
+                diff.setMeasurementTimeStamp(current.getMeasurementTimeStamp());
                 dao.addSnapshotToFlight(diff);
-                log.log(Level.INFO, "Measurement: " + previous);
+                log.log(Level.FINE, "Measurement: " + previous);
                 log.log(Level.INFO, "Diff:        " + diff);
+                previous = current;
             }
+
         }
     }
 }

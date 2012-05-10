@@ -1,6 +1,6 @@
 /*
  * ResourceFlight.java ->
- * Copyright (C) 2012-05-09 Gábor Bernát
+ * Copyright (C) 2012-05-10 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -19,8 +19,8 @@ package net.primeranks.fs_server;
 
 import com.google.inject.Key;
 import com.google.inject.name.Names;
-import net.primeranks.fs_data.Flight;
-import net.primeranks.fs_data.FlightSnapshot;
+import fs_data.Flight;
+import fs_data.FlightSnapshot;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -62,10 +62,10 @@ public class ResourceFlight extends Resource_RESTInjectorProvider {
     @PUT
     @Path("snapshot/")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.TEXT_PLAIN})
     public void addSnapshotToFlight(JAXBElement<FlightSnapshot> s) {
         FlightSnapshot x = daoFlightSnapshot().addFlightSnapshot(s.getValue());
-        throwIfPreconditionFailedIfNull(x, "Null value found for the Flight ID.", MediaType.TEXT_PLAIN_TYPE);
+        if (x == null)
+            throw new WebApplicationException(500);
     }
 
     @GET
