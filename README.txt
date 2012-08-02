@@ -1,0 +1,1 @@
+This application allows you to save your Microsoft Flight Simulator X flights to a remote Google App Engine, and watch it (later on or live), on your Android Phone.
