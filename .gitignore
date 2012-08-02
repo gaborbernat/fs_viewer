@@ -77,4 +77,4 @@ tramp
 *.dex
 
 # generated files
-gen/
+*gen/*
