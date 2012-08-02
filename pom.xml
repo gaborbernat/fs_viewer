@@ -72,6 +72,15 @@
 					<artifactId>maven-license-plugin</artifactId>
 					<configuration>
 						<header>resources/etc/headers/apache2.txt</header>
+						<strictCheck>true</strictCheck>
+						<mapping>
+							<gitignore>SCRIPT_STYLE</gitignore>
+						</mapping>
+						<excludes>
+							<exclude>target/**</exclude>
+							<exclude>**/*.dll</exclude>
+						</excludes>
+						<useDefaultExcludes>true</useDefaultExcludes>
 					</configuration>
 				</plugin>
 				<!-- Use the latest maven release plugin, the git scm requires it -->
