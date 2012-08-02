@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+                             http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.primeranks.fs_viewer</groupId>
+		<artifactId>fs_viewer</artifactId>
+		<version>0.2-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>fs_replay</artifactId>
+	<packaging>apk</packaging>
+
+	<name>FS Replay</name>
+	<description>View flights on your android application</description>
+
+	<properties>
+		<androidVersion>2.2.1</androidVersion>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<!-- dependency on android.jar from Maven Central -->
+		<dependency>
+			<groupId>com.google.android</groupId>
+			<artifactId>android</artifactId>
+			<version>${androidVersion}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+					<artifactId>android-maven-plugin</artifactId>
+					<version>3.3.0</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+
+			<!-- configure the Android plugin -->
+			<plugin>
+				<groupId>com.jayway.maven.plugins.android.generation2</groupId>
+				<artifactId>android-maven-plugin</artifactId>
+				<version>3.3.0</version>
+
+				<configuration>
+
+					<!-- tell the plugin where to find the Android SDK -->
+					<sdk>
+						<platform>8</platform>
+					</sdk>
+
+					<!-- we only want clean installs -->
+					<undeployBeforeDeploy>true</undeployBeforeDeploy>
+
+					<!-- uncomment to grant a little more memory should the dex task crash with OOM
+          <jvmArguments>
+            <jvmArgument>-Xms256m</jvmArgument>
+          </jvmArguments>
+           -->
+
+					<emulator>
+						<avd>android-2.2-normal-mdpi</avd>
+						<wait>30000</wait>
+
+						<!-- uncomment if you'd like to run the emulator on a headless machine
+            <options>-no-skin -no-boot-anim -no-audio -no-window/options>
+             -->
+					</emulator>
+				</configuration>
+
+				<!-- hook into the install phase to zipalign the APK -->
+				<executions>
+					<execution>
+						<id>alignApk</id>
+						<phase>install</phase>
+						<goals>
+							<goal>zipalign</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<!-- we need this e.g. for Maven to recognize the 'apk' packaging type -->
+				<extensions>true</extensions>
+			</plugin> 
+		</plugins>
+	</build>
+
+</project>

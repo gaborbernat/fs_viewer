@@ -1,0 +1,80 @@
+# Maven files
+target/
+
+# IDEA files
+*.iml
+*.ipr
+*.iws
+.idea/
+
+#Netbeans files
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# SublimeText project files
+/*.sublime-project
+*.sublime-workspace
+
+# Eclipse files
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# Java files
+*.class
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# Android built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# generated files
+gen/
