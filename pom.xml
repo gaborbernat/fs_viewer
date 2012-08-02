@@ -4,99 +4,109 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
                              http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>net.primeranks.fs_viewer</groupId>
-    <artifactId>fs_viewer</artifactId>
-    <version>0.2-SNAPSHOT</version>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>net.primeranks.fs_viewer</groupId>
+	<artifactId>fs_viewer</artifactId>
+	<version>0.2-SNAPSHOT</version>
 
-    <!-- The POM indicates that this just contains submodules, points to other POM files. -->
-    <packaging>pom</packaging>
-    <name>Viewer for the Microsoft Flight Simulator</name>
+	<!-- The POM indicates that this just contains submodules, points to other POM files. -->
+	<packaging>pom</packaging>
+	<name>Viewer for the Microsoft Flight Simulator</name>
 
-    <modules>
-        <!-- The fs_data contains structures to hold data across the project. -->
-        <module>fs_data</module>
-        <!-- This is a Google App Engine server to hold the collected Flight Simulator data.-->
-        <module>fs_primeranks_server</module>
-        <!-- A JAR that holds a local server to collect data from the Flight Simulator
+	<modules>
+		<!-- The fs_data contains structures to hold data across the project. -->
+		<module>fs_data</module>
+		<!-- This is a Google App Engine server to hold the collected Flight Simulator data.-->
+		<module>fs_primeranks_server</module>
+		<!-- A JAR that holds a local server to collect data from the Flight Simulator
               and relay the data further to the fs_primeranks_server that will save it.-->
-        <module>fs_proxy</module>
-        <!-- An Android application to download the data from the fs_primeranks_server and display it.-->
-        <module>fs_replay</module>
-    </modules>
+		<module>fs_proxy</module>
+		<!-- An Android application to download the data from the fs_primeranks_server and display it.-->
+		<module>fs_replay</module>
+	</modules>
 
-    <!-- Project hosting organization. -->
-    <organization>
-        <name>Primeranks</name>
-        <url>http://www.primeranks.net</url>
-    </organization>
+	<!-- Project hosting organization. -->
+	<organization>
+		<name>Primeranks</name>
+		<url>http://www.primeranks.net</url>
+	</organization>
 
-    <!-- Participating people in to the project. -->
-    <developers>
-        <developer>
-            <id>gabor.bernat</id>
-            <name>Gabor Bernat</name>
-            <email>bernat@primeranks.net</email>
-            <url>http://www.primeranks.net</url>
-            <organization>Primeranks</organization>
-            <organizationUrl>http://www.primeranks.net</organizationUrl>
-            <roles>
-                <role>developer</role>
-                <role>architect</role>
-            </roles>
-            <timezone>+2</timezone>
-        </developer>
-    </developers>
+	<!-- Participating people in to the project. -->
+	<developers>
+		<developer>
+			<id>gabor.bernat</id>
+			<name>Gabor Bernat</name>
+			<email>bernat@primeranks.net</email>
+			<url>http://www.primeranks.net</url>
+			<organization>Primeranks</organization>
+			<organizationUrl>http://www.primeranks.net</organizationUrl>
+			<roles>
+				<role>developer</role>
+				<role>architect</role>
+			</roles>
+			<timezone>+2</timezone>
+		</developer>
+	</developers>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <!-- Specify the Java Compiler (and runtime) version to use
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<!-- Specify the Java Compiler (and runtime) version to use
                               For now Google App Engine requires 1.6 so stick to this.
                          -->
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>com.mycila.maven-license-plugin</groupId>
-                    <artifactId>maven-license-plugin</artifactId>
-                    <configuration>
-                        <header>resources/etc/headers/apache2.txt</header>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>com.mycila.maven-license-plugin</groupId>
+					<artifactId>maven-license-plugin</artifactId>
+					<configuration>
+						<header>resources/etc/headers/apache2.txt</header>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 
-    <!-- Licensing information -->
-    <pluginRepositories>
-        <pluginRepository>
-            <id>mc-release</id>
-            <name>Local Maven repository of releases</name>
-            <url>http://mc-repo.googlecode.com/svn/maven2/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </pluginRepository>
-    </pluginRepositories>
+	<!-- Licensing information -->
+	<pluginRepositories>
+		<pluginRepository>
+			<id>mc-release</id>
+			<name>Local Maven repository of releases</name>
+			<url>http://mc-repo.googlecode.com/svn/maven2/snapshots</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
 
-    <!-- Github support for maven -->
-    <!--<scm>-->
-    <!--<connection>scm:git:git@github.com:tobrien/git-demo.git</connection>-->
-    <!--<url>scm:git:git@github.com:tobrien/git-demo.git</url>-->
-    <!--<developerConnection>scm:git:git@github.com:tobrien/git-demo.git</developerConnection>-->
-    <!--</scm>-->
+	<!-- Github support for maven -->
+	<scm>
+		<connection>scm:git:git@github.com:gaborbernat/fs_viewer.git</connection>
+		<url>scm:git:git@github.com:gaborbernat/fs_viewer.git</url>
+		<developerConnection>scm:git:git@github.com:gaborbernat/fs_viewer.git</developerConnection>
+	</scm>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.3.2</version>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
