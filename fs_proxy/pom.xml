@@ -58,8 +58,6 @@
             <groupId>com.flightsim.fsuipc</groupId>
             <artifactId>fsuipc</artifactId>
             <version>4.84</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/fsuipc.jar</systemPath>
         </dependency>
 
         <dependency>

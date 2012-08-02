@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=fsuipc.jar -DgroupId=com.flightsim.fsuipc -DartifactId=fsuipc -Dversion=4.84 -Dpackaging=jar

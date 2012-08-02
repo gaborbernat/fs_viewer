@@ -66,6 +66,7 @@
 						<target>1.6</target>
 					</configuration>
 				</plugin>
+				<!-- License file -->
 				<plugin>
 					<groupId>com.mycila.maven-license-plugin</groupId>
 					<artifactId>maven-license-plugin</artifactId>
@@ -73,24 +74,15 @@
 						<header>resources/etc/headers/apache2.txt</header>
 					</configuration>
 				</plugin>
+				<!-- Use the latest maven release plugin, the git scm requires it -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.3.2</version>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
-
-	<!-- Licensing information -->
-	<pluginRepositories>
-		<pluginRepository>
-			<id>mc-release</id>
-			<name>Local Maven repository of releases</name>
-			<url>http://mc-repo.googlecode.com/svn/maven2/snapshots</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-		</pluginRepository>
-	</pluginRepositories>
 
 	<!-- Github support for maven -->
 	<scm>
@@ -99,14 +91,5 @@
 		<developerConnection>scm:git:git@github.com:gaborbernat/fs_viewer.git</developerConnection>
 	</scm>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.3.2</version>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
