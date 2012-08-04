@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.primeranks.bme.fs_replay;
+package net.primeranks.fs_viewer.fs_replay;
 
 public final class Config {
     public static final String FS_PRIMERANKS_API_REST_ENDPOINT = "http://primeranksfs.appspot.com/rest/";

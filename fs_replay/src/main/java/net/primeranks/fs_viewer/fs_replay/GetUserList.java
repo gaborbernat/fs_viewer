@@ -13,12 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.primeranks.bme.fs_replay;
+package net.primeranks.fs_viewer.fs_replay;
 
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
-import fs_data.User;
+import com.primeranks.bme.fs_replay.R;
+import net.primeranks.fs_viewer.fs_data.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;

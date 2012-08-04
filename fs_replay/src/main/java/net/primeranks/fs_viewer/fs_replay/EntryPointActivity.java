@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.primeranks.bme.fs_replay;
+package net.primeranks.fs_viewer.fs_replay;
 
 import android.app.ListActivity;
 import android.content.IntentFilter;
@@ -26,7 +26,8 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import fs_data.User;
+import com.primeranks.bme.fs_replay.R;
+import net.primeranks.fs_viewer.fs_data.User;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.conn.params.ConnManagerParams;

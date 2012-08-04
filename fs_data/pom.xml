@@ -16,7 +16,7 @@
     <name>Data containers for the FS Viewer</name>
 
     <build>
-        <finalName>fs_primeranks_server</finalName>
+        <finalName>fs_data</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
