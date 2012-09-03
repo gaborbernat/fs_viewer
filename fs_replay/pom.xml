@@ -45,6 +45,7 @@
                     <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                     <artifactId>android-maven-plugin</artifactId>
                     <version>3.3.0</version>
+                    <extensions>true</extensions>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -61,6 +62,7 @@
                     <!-- tell the plugin where to find the Android SDK -->
                     <sdk>
                         <platform>10</platform>
+                        <path>d:\sdk\download\android\android-sdk\</path>
                     </sdk>
 
                     <!-- we only want clean installs -->

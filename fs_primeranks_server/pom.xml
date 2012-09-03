@@ -16,8 +16,54 @@
 
 	<build>
 		<finalName>fs_primeranks_server</finalName>
+        <pluginManagement>
+            <plugins>
+                <!-- Copy dependencies to war/WEB-INF/lib for GAE proj compliance. -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>default-cli</id>
+                            <goals>
+                                <goal>copy-dependencies</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${basedir}/war/WEB-INF/lib/</outputDirectory>
+                                <overWriteReleases>false</overWriteReleases>
+                                <overWriteSnapshots>false</overWriteSnapshots>
+                                <overWriteIfNewer>true</overWriteIfNewer>
+                                <excludeArtifactIds>gwt-user,gwt-dev</excludeArtifactIds>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>net.kindleit</groupId>
+                    <artifactId>maven-gae-plugin</artifactId>
+                    <version>0.9.4</version>
+                    <configuration>
+                        <port>8231</port>
+                        <monitorPort>8232</monitorPort>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 	</build>
 	<dependencies>
+        <dependency>
+            <groupId>net.kindleit</groupId>
+            <artifactId>gae-runtime</artifactId>
+            <version>1.7.0</version>
+            <type>pom</type>
+            <exclusions>
+                <exclusion>
+                    <artifactId>appengine-tools-sdk</artifactId>
+                    <groupId>com.google.appengine</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>net.primeranks.fs_viewer</groupId>
             <artifactId>fs_data</artifactId>
@@ -27,7 +73,8 @@
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>1.7.0</version>
+			<version>${gae.version}</version>
+            <scope>provided</scope>
 		</dependency>
         <!--The REST interface-->
         <dependency>
@@ -75,5 +122,32 @@
             <id>objectify-appengine</id>
             <url>http://objectify-appengine.googlecode.com/svn/maven</url>
         </repository>
+        <repository>
+            <id>datanucleus</id>
+            <name>DataNucleus Repository</name>
+            <url>http://www.datanucleus.org/downloads/maven2</url>
+        </repository>
+        <repository>
+            <id>maven-gae-plugin</id>
+            <name>Maven-GAE Plugin Repository</name>
+            <url>http://maven-gae-plugin.googlecode.com/svn/repository/</url>
+        </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>datanucleus</id>
+            <name>DataNucleus Repository</name>
+            <url>http://www.datanucleus.org/downloads/maven2</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>maven-gae-plugin</id>
+            <name>Maven-GAE Plugin Repository</name>
+            <url>http://maven-gae-plugin.googlecode.com/svn/repository/</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <properties>
+        <gae.version>1.7.1</gae.version>
+    </properties>
 </project>
