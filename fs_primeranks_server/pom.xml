@@ -7,12 +7,12 @@
 	<parent>
 		<groupId>net.primeranks.fs_viewer</groupId>
 		<artifactId>fs_viewer</artifactId>
-		<version>0.2-SNAPSHOT</version>
+        <version>0.2-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>fs_primeranks_server</artifactId>
 	<packaging>war</packaging>
-	<name>Google App Engine Server to store the data</name>
+	<name>WAR - Google App Engine Server to store the data</name>
 
 	<build>
 		<finalName>fs_primeranks_server</finalName>
@@ -56,12 +56,6 @@
             <artifactId>gae-runtime</artifactId>
             <version>1.7.0</version>
             <type>pom</type>
-            <exclusions>
-                <exclusion>
-                    <artifactId>appengine-tools-sdk</artifactId>
-                    <groupId>com.google.appengine</groupId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -74,8 +68,31 @@
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 			<version>${gae.version}</version>
-            <scope>provided</scope>
+            <!--<scope>provided</scope>-->
 		</dependency>
+
+        <dependency>
+            <groupId>com.google.appengine.orm</groupId>
+            <artifactId>datanucleus-appengine</artifactId>
+            <version>2.0.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-core</artifactId>
+            <version>[3.0, 3.0.99)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jdo</artifactId>
+            <version>[3.0, 3.0.99)</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>javax.jdo</groupId>
+            <artifactId>jdo-api</artifactId>
+            <version>[3.0, 4.0)</version>
+        </dependency>
+
         <!--The REST interface-->
         <dependency>
             <groupId>javax.ws.rs</groupId>
@@ -99,7 +116,13 @@
         <dependency>
             <groupId>com.googlecode.objectify</groupId>
             <artifactId>objectify</artifactId>
-            <version>3.0</version>
+            <version>3.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0.2</version>
         </dependency>
 
         <dependency>
@@ -120,7 +143,7 @@
         <!-- Objectify is not part of the Maven repository. -->
         <repository>
             <id>objectify-appengine</id>
-            <url>http://objectify-appengine.googlecode.com/svn/maven</url>
+            <url>http://maven.objectify-appengine.googlecode.com/git/</url>
         </repository>
         <repository>
             <id>datanucleus</id>
@@ -135,11 +158,6 @@
     </repositories>
 
     <pluginRepositories>
-        <pluginRepository>
-            <id>datanucleus</id>
-            <name>DataNucleus Repository</name>
-            <url>http://www.datanucleus.org/downloads/maven2</url>
-        </pluginRepository>
         <pluginRepository>
             <id>maven-gae-plugin</id>
             <name>Maven-GAE Plugin Repository</name>

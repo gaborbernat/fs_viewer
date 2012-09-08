@@ -16,7 +16,6 @@
 package net.primeranks.fs_viewer.fs_server;
 
 import com.google.inject.Key;
-import com.google.inject.name.Names;
 import net.primeranks.fs_viewer.fs_data.Flight;
 import net.primeranks.fs_viewer.fs_data.FlightSnapshot;
 
@@ -83,10 +82,10 @@ public class ResourceFlight extends Resource_RESTInjectorProvider {
     }
 
     private DaoFlight daoFlight() {
-        return (DaoFlight) getInjectorInstance().getInstance(Key.get(Dao.class, Names.named("objectify.dao.Flight")));
+        return (DaoFlight) getInjectorInstance().getInstance(Key.get(Dao.class,GuiceModuleFsPrimeranksServer.flightName));
     }
 
     private DaoFlightSnapshot daoFlightSnapshot() {
-        return (DaoFlightSnapshot) getInjectorInstance().getInstance(Key.get(Dao.class, Names.named("objectify.dao.FlightSnapshot")));
+        return (DaoFlightSnapshot) getInjectorInstance().getInstance(Key.get(Dao.class, GuiceModuleFsPrimeranksServer.flightSnapshot));
     }
 }

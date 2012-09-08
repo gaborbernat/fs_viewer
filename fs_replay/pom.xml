@@ -13,7 +13,7 @@
     <artifactId>fs_replay</artifactId>
     <packaging>apk</packaging>
 
-    <name>FS Replay</name>
+    <name>APK - FS Replay</name>
     <description>View flights on your android application</description>
 
     <properties>
@@ -55,7 +55,7 @@
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.3.2</version>
 
                 <configuration>
 
@@ -93,13 +93,13 @@
                             <goal>zipalign</goal>
                         </goals>
                     </execution>
-                    <execution>
-                        <id>startEmulator</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>emulator-start</goal>
-                        </goals>
-                    </execution>
+                    <!--<execution>-->
+                        <!--<id>startEmulator</id>-->
+                        <!--<phase>initialize</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>emulator-start</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
                 </executions>
 
                 <!-- we need this e.g. for Maven to recognize the 'apk' packaging type -->

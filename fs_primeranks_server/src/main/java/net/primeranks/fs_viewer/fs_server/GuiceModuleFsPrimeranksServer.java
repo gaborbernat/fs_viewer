@@ -17,22 +17,24 @@ package net.primeranks.fs_viewer.fs_server;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 import com.google.inject.name.Names;
-import net.primeranks.fs_viewer.fs_server.Dao;
-import net.primeranks.fs_viewer.fs_server.DaoFlight;
-import net.primeranks.fs_viewer.fs_server.DaoUser;
 
 public class GuiceModuleFsPrimeranksServer extends AbstractModule {
     public GuiceModuleFsPrimeranksServer() {
     }
+    public static Named userName = Names.named("objectify.dao.User");
+    public static Named flightName = Names.named("objectify.dao.Flight");
+    public static Named flightSnapshot = Names.named("objectify.dao.FlightSnapshot");
 
     @Override
     public void configure() {
-        bind(Dao.class).annotatedWith(Names.named("objectify.dao.User"))
+
+        bind(Dao.class).annotatedWith(userName)
                 .to(DaoUser.class).in(Singleton.class);
-        bind(Dao.class).annotatedWith(Names.named("objectify.dao.Flight"))
+        bind(Dao.class).annotatedWith(flightName)
                 .to(DaoFlight.class).in(Singleton.class);
-        bind(Dao.class).annotatedWith(Names.named("objectify.dao.FlightSnapshot"))
+        bind(Dao.class).annotatedWith(flightSnapshot)
                 .to(DaoFlightSnapshot.class).in(Singleton.class);
     }
 }

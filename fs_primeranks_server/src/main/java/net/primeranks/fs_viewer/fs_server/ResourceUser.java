@@ -44,6 +44,6 @@ public class ResourceUser extends Resource_RESTInjectorProvider {
     }
 
     private DaoUser dao() {
-        return (DaoUser) getInjectorInstance().getInstance(Key.get(Dao.class, Names.named("objectify.dao.User")));
+        return (DaoUser) getInjectorInstance().getInstance(Key.get(Dao.class, GuiceModuleFsPrimeranksServer.userName));
     }
 }

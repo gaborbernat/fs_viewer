@@ -21,6 +21,7 @@ import java.util.Set;
 
 public class JerseyMainApplication extends Application {
     public Set<Class<?>> getClasses() {
+
         Set<Class<?>> s = new HashSet<Class<?>>();
         s.add(ResourceUser.class);
         s.add(ResourceFlight.class);

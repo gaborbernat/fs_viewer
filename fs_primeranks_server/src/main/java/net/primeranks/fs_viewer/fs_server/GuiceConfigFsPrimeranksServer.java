@@ -38,7 +38,7 @@ public class  GuiceConfigFsPrimeranksServer extends GuiceServletContextListener 
     protected Injector getInjector() {
         final Map<String, String> params = new HashMap<String, String>();
         // The following line will use JerseyMainApplication.java to define Jersey resources
-        params.put("javax.ws.rs.Application", "net.primeranks.fs_server.JerseyMainApplication");
+        params.put("javax.ws.rs.Application", "net.primeranks.fs_viewer.fs_server.JerseyMainApplication");
 
         return Guice.createInjector(
                 new GuiceModuleFsPrimeranksServer(),

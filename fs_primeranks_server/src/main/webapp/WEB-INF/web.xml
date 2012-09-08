@@ -23,7 +23,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 
     <!-- Provides support for Guice-based Web applications. -->
     <listener>
-        <listener-class>net.primeranks.fs_server.GuiceConfigFsPrimeranksServer</listener-class>
+        <listener-class>net.primeranks.fs_viewer.fs_server.GuiceConfigFsPrimeranksServer</listener-class>
     </listener>
     <filter>
         <filter-name>Guice Filter</filter-name>

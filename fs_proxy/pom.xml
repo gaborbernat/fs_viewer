@@ -13,7 +13,7 @@
 	<artifactId>fs_proxy</artifactId>
 	<packaging>jar</packaging>
 
-	<name>Data containers for the FS Viewer</name>
+	<name>JAR - Proxy to forward Flight Simulator data.</name>
 
 	<build>
 		<finalName>fs_proxy</finalName>
