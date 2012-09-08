@@ -23,6 +23,7 @@
           <element id="library" level="project" name="javax.ws.rs:jsr311-api:1.1.1" />
           <element id="library" level="project" name="jersey-guice-1.13" />
           <element id="library" level="project" name="com.sun.jersey:jersey-bundle:1.9.1" />
+          <element id="library" level="project" name="com.google.appengine:appengine-api-1.0-sdk:1.7.1" />
         </element>
       </element>
     </root>
