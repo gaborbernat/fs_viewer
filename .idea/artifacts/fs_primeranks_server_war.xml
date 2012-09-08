@@ -15,6 +15,14 @@
           <element id="library" level="application" name="objectify-3.1" />
           <element id="library" level="application" name="jersey" />
           <element id="library" level="application" name="Aspect-Oriented Programming (AOP) Alliance" />
+          <element id="library" level="project" name="javax.xml.bind:jaxb-api:2.2.6" />
+          <element id="library" level="project" name="javax.persistence:persistence-api:1.0.2" />
+          <element id="library" level="project" name="objectify-3.1" />
+          <element id="library" level="project" name="com.google.inject:guice:3.0" />
+          <element id="library" level="project" name="guice-servlet-3.0" />
+          <element id="library" level="project" name="javax.ws.rs:jsr311-api:1.1.1" />
+          <element id="library" level="project" name="jersey-guice-1.13" />
+          <element id="library" level="project" name="com.sun.jersey:jersey-bundle:1.9.1" />
         </element>
       </element>
     </root>

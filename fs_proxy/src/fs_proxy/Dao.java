@@ -17,9 +17,10 @@
 
 package fs_proxy;
 
-import fs_data.Flight;
-import fs_data.FlightSnapshot;
-import fs_data.User;
+
+import net.primeranks.fs_data.Flight;
+import net.primeranks.fs_data.FlightSnapshot;
+import net.primeranks.fs_data.User;
 
 public interface Dao {
     public Long getUserID(User u);

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jersey-guice-1.13">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jersey-guice/1.13/jersey-guice-1.13.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

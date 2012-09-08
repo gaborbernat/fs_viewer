@@ -20,14 +20,12 @@ package net.primeranks.fs_server;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
-import fs_data.User;
+import net.primeranks.fs_data.User;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class DaoUser extends Dao {
-    Logger log = Logger.getLogger(DaoUser.class.getName());
 
     public User findUserById(Long id) {
         return ofy().get(User.class, id);
@@ -56,6 +54,7 @@ public class DaoUser extends Dao {
 
         Objectify ofy = ObjectifyService.begin();
         Query<User> q = ofy.query(User.class);
+
         Iterable<User> tbl = q.fetch();
 
         for (User p : tbl) {

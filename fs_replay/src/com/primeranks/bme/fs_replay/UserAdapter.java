@@ -23,7 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import fs_data.User;
+import net.primeranks.fs_data.User;
 
 import java.util.List;
 

@@ -19,7 +19,7 @@ package net.primeranks.fs_server;
 
 import com.google.inject.Key;
 import com.google.inject.name.Names;
-import fs_data.User;
+import net.primeranks.fs_data.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

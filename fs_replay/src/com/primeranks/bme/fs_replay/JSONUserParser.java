@@ -17,7 +17,7 @@
 
 package com.primeranks.bme.fs_replay;
 
-import fs_data.User;
+import net.primeranks.fs_data.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
 

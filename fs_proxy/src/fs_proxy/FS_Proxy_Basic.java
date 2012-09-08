@@ -20,9 +20,9 @@ package fs_proxy;
 import com.flightsim.fsuipc.FSAircraft;
 import com.flightsim.fsuipc.FSUIPC;
 import com.flightsim.fsuipc.fsuipc_wrapper;
-import fs_data.Flight;
-import fs_data.FlightSnapshot;
-import fs_data.User;
+import net.primeranks.fs_data.Flight;
+import net.primeranks.fs_data.FlightSnapshot;
+import net.primeranks.fs_data.User;
 
 import javax.inject.Inject;
 import java.text.ParseException;

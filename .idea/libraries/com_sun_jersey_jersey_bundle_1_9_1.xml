@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="com.sun.jersey:jersey-bundle:1.9.1" type="repository">
+    <properties maven-id="com.sun.jersey:jersey-bundle:1.9.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jersey-bundle-1.9.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

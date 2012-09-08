@@ -28,7 +28,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
-import fs_data.User;
+import net.primeranks.fs_data.User;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.conn.params.ConnManagerParams;

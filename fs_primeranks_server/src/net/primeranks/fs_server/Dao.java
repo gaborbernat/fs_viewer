@@ -19,9 +19,10 @@ package net.primeranks.fs_server;
 
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.util.DAOBase;
-import fs_data.Flight;
-import fs_data.FlightSnapshot;
-import fs_data.User;
+import net.primeranks.fs_data.Flight;
+import net.primeranks.fs_data.FlightSnapshot;
+import net.primeranks.fs_data.User;
+
 
 public class Dao extends DAOBase {
     // Objectify is the simplest convenient interface to the Google App Engine datastore.

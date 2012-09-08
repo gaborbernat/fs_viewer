@@ -18,7 +18,7 @@
 package net.primeranks.fs_server;
 
 import com.googlecode.objectify.Query;
-import fs_data.Flight;
+import net.primeranks.fs_data.Flight;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -36,9 +36,9 @@ public class FlightSnapshot {
     protected Long flightId;
     // Time
     @XmlAttribute
-    protected long simulationTimeStamp;
+    protected Long simulationTimeStamp;
     @XmlAttribute
-    protected long measurementTimeStamp;
+    protected Long measurementTimeStamp;
 
     // Aircraft type
     protected String aircraftTypeName;
@@ -217,7 +217,7 @@ public class FlightSnapshot {
         this.flightId = flightId;
     }
 
-    public long getSimulationTimeStamp() {
+    public Long getSimulationTimeStamp() {
         return simulationTimeStamp;
     }
 

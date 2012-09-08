@@ -20,7 +20,7 @@ package com.primeranks.bme.fs_replay;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
-import fs_data.User;
+import net.primeranks.fs_data.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;

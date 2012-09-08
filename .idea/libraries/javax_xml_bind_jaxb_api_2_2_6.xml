@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="javax.xml.bind:jaxb-api:2.2.6" type="repository">
+    <properties maven-id="javax.xml.bind:jaxb-api:2.2.6" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-api-2.2.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/lib/jaxb-api-2.2.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES />
+  </library>
+</component>

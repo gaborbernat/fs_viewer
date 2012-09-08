@@ -19,8 +19,8 @@ package net.primeranks.fs_server;
 
 import com.google.inject.Key;
 import com.google.inject.name.Names;
-import fs_data.Flight;
-import fs_data.FlightSnapshot;
+import net.primeranks.fs_data.Flight;
+import net.primeranks.fs_data.FlightSnapshot;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

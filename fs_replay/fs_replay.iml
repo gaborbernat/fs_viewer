@@ -9,8 +9,6 @@
         <option name="RES_FOLDER_RELATIVE_PATH" value="/res" />
         <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/assets" />
         <option name="LIBS_FOLDER_RELATIVE_PATH" value="/libs" />
-        <option name="REGENERATE_R_JAVA" value="true" />
-        <option name="REGENERATE_JAVA_BY_AIDL" value="true" />
         <option name="USE_CUSTOM_APK_RESOURCE_FOLDER" value="false" />
         <option name="CUSTOM_APK_RESOURCE_FOLDER" value="" />
         <option name="USE_CUSTOM_COMPILER_MANIFEST" value="false" />
@@ -26,6 +24,8 @@
         <resOverlayFolders>
           <path>/res-overlay</path>
         </resOverlayFolders>
+        <includeSystemProguardFile>false</includeSystemProguardFile>
+        <additionalNativeLibs />
       </configuration>
     </facet>
   </component>
@@ -37,8 +37,9 @@
     </content>
     <orderEntry type="jdk" jdkName="Android 2.3.3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="guice-3.0" level="application" />
     <orderEntry type="module" module-name="fs_data" />
+    <orderEntry type="library" name="objectify-3.1" level="project" />
+    <orderEntry type="library" name="com.google.inject:guice:3.0" level="project" />
   </component>
 </module>
 

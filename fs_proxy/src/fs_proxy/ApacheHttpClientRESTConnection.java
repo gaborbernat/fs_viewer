@@ -21,9 +21,10 @@ import com.sun.jersey.api.client.*;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-import fs_data.Flight;
-import fs_data.FlightSnapshot;
-import fs_data.User;
+import net.primeranks.fs_data.Flight;
+import net.primeranks.fs_data.FlightSnapshot;
+import net.primeranks.fs_data.User;
+
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
