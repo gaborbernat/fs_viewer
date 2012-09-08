@@ -17,8 +17,6 @@
     <description>View flights on your android application</description>
 
     <properties>
-        <androidVersion>2.2.1</androidVersion>
-        <android.device>emulator</android.device>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -33,12 +31,22 @@
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
-            <version>${androidVersion}</version>
+            <version>2.3.3</version>
             <scope>provided</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.google.android.maps</groupId>
+            <artifactId>maps</artifactId>
+            <version>10_r2</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
+        <sourceDirectory>src</sourceDirectory>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -50,62 +58,48 @@
             </plugins>
         </pluginManagement>
         <plugins>
-
-            <!-- configure the Android plugin -->
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>android-maven-plugin</artifactId>
-                <version>3.3.2</version>
-
                 <configuration>
-
-                    <!-- tell the plugin where to find the Android SDK -->
-                    <sdk>
-                        <platform>10</platform>
-                        <path>d:\sdk\download\android\android-sdk\</path>
-                    </sdk>
-
                     <!-- we only want clean installs -->
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
 
-                    <!-- uncomment to grant a little more memory should the dex task crash with OOM
-                   <jvmArguments>
-                     <jvmArgument>-Xms256m</jvmArgument>
-                   </jvmArguments>
-                    -->
-
+                    <run>
+                        <debug>true</debug>
+                    </run>
+                    <sdk>
+                        <platform>10</platform>
+                        <!-- Setting the Path is not required, instead set the ANDROID_HOME system variable -->
+                        <!--<path>d:\sdk\download\android\android-sdk\</path>-->
+                    </sdk>
                     <emulator>
                         <avd>Emulator</avd>
                         <wait>30000</wait>
                         <!--<options>-no-skin -no-boot-anim -no-audio -no-window</options>-->
                     </emulator>
-                    <dex>
-                        <coreLibrary>true</coreLibrary>
-                    </dex>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
                 </configuration>
-
                 <!-- hook into the install phase to zipalign the APK -->
                 <executions>
-                    <execution>
-                        <id>alignApk</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>zipalign</goal>
-                        </goals>
-                    </execution>
                     <!--<execution>-->
-                        <!--<id>startEmulator</id>-->
-                        <!--<phase>initialize</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>emulator-start</goal>-->
-                        <!--</goals>-->
+                    <!--<id>alignApk</id>-->
+                    <!--<phase>install</phase>-->
+                    <!--<goals>-->
+                    <!--<goal>zipalign</goal>-->
+                    <!--</goals>-->
+                    <!--</execution>-->
+                    <!--<execution>-->
+                    <!--<id>startEmulator</id>-->
+                    <!--<phase>initialize</phase>-->
+                    <!--<goals>-->
+                    <!--<goal>emulator-start</goal>-->
+                    <!--</goals>-->
                     <!--</execution>-->
                 </executions>
-
-                <!-- we need this e.g. for Maven to recognize the 'apk' packaging type -->
-                <extensions>true</extensions>
             </plugin>
         </plugins>
     </build>
+
 
 </project>
