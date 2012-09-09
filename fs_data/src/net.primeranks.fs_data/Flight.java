@@ -75,4 +75,15 @@ public class Flight {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", periodicity=" + periodicity +
+                '}';
+    }
 }

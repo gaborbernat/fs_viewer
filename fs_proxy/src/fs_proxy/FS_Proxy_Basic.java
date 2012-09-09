@@ -163,6 +163,11 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
             log.log(Level.SEVERE, "Reading the simulation timestamp failed:" + e.getMessage());
         }
 
+        int x = aircraft.Heading();
+        double p =  x /  65536;
+        p *= 360;
+        p /=  65536;
+
         return new FlightSnapshot.Builder()
                 // .id() -> Server side generated - irrelevant here
                 .flightId(flight.getId())
@@ -171,7 +176,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
                 .aircraftTypeName((String) readFromGeneral(FSInformation.AIRCRAFT_TYPE_NAME))
                 .aircraftCode((String) readFromGeneral(FSInformation.AIRCRAFT_CODE))
                 .altitude(aircraft.Altitude())
-                .heading(aircraft.Heading())
+                .heading(p)
                 .longitude(aircraft.Longitude())
                 .latitude(aircraft.Latitude())
                 .verticalSpeed(aircraft.VerticalSpeed())
@@ -215,7 +220,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
                 flight.setStartDate(System.currentTimeMillis());
                 flight.setPeriodicity(refreshInterval);
                 flight = dao.addFlight(flight);                 // Create it server side
-                log.log(Level.INFO, "Started flight at: " + flight.getStartDate());
+                log.log(Level.INFO, "Flight: " +  flight);
                 return;
             }
             log.log(Level.INFO, new SimpleDateFormat("HH:mm:ss ").format(new Date()) + "FSUIPC not found. Retrying later.");
@@ -245,6 +250,7 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
 
             current = readSnapShot();
             diff = current.differenceFrom(previous);
+            diff.setFlightId(flight.getId());
             if (diff != null && !diff.isDefault() &&
                     !current.getSimulationTimeStamp().equals(previous.getSimulationTimeStamp())
                     && diff.getSimulationTimeStamp().compareTo(ZERO) > 0) {

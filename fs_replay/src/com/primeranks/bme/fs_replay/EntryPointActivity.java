@@ -168,7 +168,7 @@ public class EntryPointActivity extends ListActivity implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        User u = userAdapter.getItem(position);
+        User u = userAdapter.getItem(position-1);
         Toast.makeText(this, getString(R.string.userSelectedToastText) + u.toString(), Toast.LENGTH_LONG).show();
     }
 

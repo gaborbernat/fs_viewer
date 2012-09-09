@@ -17,8 +17,6 @@
 
 package net.primeranks.fs_server;
 
-import com.google.inject.Key;
-import com.google.inject.name.Names;
 import net.primeranks.fs_data.User;
 
 import javax.ws.rs.*;
@@ -32,7 +30,7 @@ public class ResourceUser extends Resource_RESTInjectorProvider {
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<User> getPlayerByNameInJSON(@QueryParam("name") String name, @QueryParam("domain") String domain) {
-        List<User> u = dao().findUserByNameAndDomain(name, domain);
+        List<User> u = Dao.User().findUserByNameAndDomain(name, domain);
         return u;
     }
 
@@ -41,11 +39,9 @@ public class ResourceUser extends Resource_RESTInjectorProvider {
     @Produces(MediaType.TEXT_PLAIN)
     public String createUser(JAXBElement<User> user) {
         User u = user.getValue();
-        u = dao().createUser(u);
+        u = Dao.User().createUser(u);
         return u.getId() != User.INVALID_ID ? u.getId().toString() : null;
     }
 
-    private DaoUser dao() {
-        return (DaoUser) getInjectorInstance().getInstance(Key.get(Dao.class, Names.named("objectify.dao.User")));
-    }
+
 }

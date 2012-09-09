@@ -53,6 +53,7 @@ public class FlightSnapshot {
     protected double verticalSpeed;
 
     public static FlightSnapshot DEFAULT = Builder.DEFAULT.build();
+    public static FlightSnapshot OFFSET = Builder.OFFSET.build();
 
     public FlightSnapshot(Builder b) {
         setValues(b);
@@ -120,13 +121,18 @@ public class FlightSnapshot {
             return this;
         return new Builder()
                 //.measurementTimeStamp(x.measurementTimeStamp == this.measurementTimeStamp ? DEFAULT.measurementTimeStamp : this.measurementTimeStamp)
-                .simulationTimeStamp(x.simulationTimeStamp == this.simulationTimeStamp ? DEFAULT.simulationTimeStamp : this.simulationTimeStamp)
-                .latitude(x.latitude == this.latitude ? DEFAULT.latitude : this.latitude)
-                .longitude(x.longitude == this.longitude ? DEFAULT.longitude : this.longitude)
-                .heading(x.heading == this.heading ? DEFAULT.heading : this.heading)
-                .altitude(x.altitude == this.altitude ? DEFAULT.altitude : this.altitude)
-                .verticalSpeed(x.verticalSpeed == this.verticalSpeed ? DEFAULT.verticalSpeed : this.verticalSpeed)
-
+                .simulationTimeStamp(x.simulationTimeStamp == this.simulationTimeStamp
+                                ? DEFAULT.simulationTimeStamp : this.simulationTimeStamp)
+                .latitude( Math.abs(x.latitude - this.latitude) <= OFFSET.latitude
+                        ? DEFAULT.latitude : this.latitude)
+                .longitude( Math.abs(x.longitude - this.longitude) <= OFFSET.latitude
+                        ? DEFAULT.longitude : this.longitude)
+                .heading( Math.abs(x.heading - this.heading) <= OFFSET.heading
+                        ? DEFAULT.heading : this.heading)
+                .altitude(Math.abs(x.altitude - this.altitude) <= OFFSET.altitude
+                        ? DEFAULT.altitude : this.altitude)
+                .verticalSpeed(Math.abs(x.verticalSpeed - this.verticalSpeed ) <= OFFSET.verticalSpeed
+                        ? DEFAULT.verticalSpeed : this.verticalSpeed)
                 .aircraftCode((String) checkIfZeroAndApplyDef(this.aircraftCode, x.aircraftCode, DEFAULT.aircraftCode))
                 .aircraftTypeName((String) checkIfZeroAndApplyDef(this.aircraftTypeName, x.aircraftTypeName, DEFAULT.aircraftTypeName))
                         // These are not taking part in the difference
@@ -291,6 +297,7 @@ public class FlightSnapshot {
 
     public static class Builder {
         public static Builder DEFAULT;
+        public static Builder OFFSET;
 
         static {
             DEFAULT = new Builder(true);  // create
@@ -308,6 +315,14 @@ public class FlightSnapshot {
             DEFAULT.heading = Double.MAX_VALUE;
             DEFAULT.altitude = Double.MAX_VALUE;
             DEFAULT.verticalSpeed = Double.MAX_VALUE;
+
+            // The offset values
+            OFFSET = new Builder(true);
+            OFFSET.latitude = 1E-3;
+            OFFSET.longitude = 1E-3;
+            OFFSET.heading = 1E-1;
+            OFFSET.altitude = 1;
+            DEFAULT.verticalSpeed = 1;
         }
 
         public Long id;

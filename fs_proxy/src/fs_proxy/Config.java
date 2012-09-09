@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.logging.Logger;
 
 public class Config {
-    public static final String TRANSPORT_FORMAT = MediaType.APPLICATION_JSON;
+    public static final String TRANSPORT_FORMAT = MediaType.APPLICATION_XML;
     static Logger log = Logger.getLogger(Config.class.getName());
     public final static String PROTOCOL = "http";
     public final static String BASE_ADDRESS;
@@ -32,10 +32,10 @@ public class Config {
     public static final String USER_PATH = "user/";
 
     static {
-        if (true)
+        if (false)
             BASE_ADDRESS = "www.primeranksfs.appspot.com";
         else
-            BASE_ADDRESS = "localhost:8989";
+            BASE_ADDRESS = "localhost:8231";
     }
 
     public static final String FLIGHT_PATH = "flight";

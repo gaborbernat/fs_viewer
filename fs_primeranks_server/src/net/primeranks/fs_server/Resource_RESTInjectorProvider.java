@@ -17,24 +17,7 @@
 
 package net.primeranks.fs_server;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.UriInfo;
-
 public class Resource_RESTInjectorProvider {
-    protected Injector injector;
+    protected static Dao Dao = new Dao();
 
-    @Context
-    protected UriInfo uriInfo;
-
-    @Context
-    protected Request request;
-
-    protected Injector getInjectorInstance() {
-        if (injector == null) injector = Guice.createInjector(new GuiceModuleFsPrimeranksServer());
-        return injector;
-    }
 }

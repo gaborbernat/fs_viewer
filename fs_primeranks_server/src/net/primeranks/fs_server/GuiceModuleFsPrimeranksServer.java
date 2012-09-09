@@ -18,19 +18,25 @@ package net.primeranks.fs_server;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 
 public class GuiceModuleFsPrimeranksServer extends AbstractModule {
+
+    public static final Named UserName = Names.named("User");
+    public static final Named FlightName = Names.named("Flight");
+    public static final Named FlightSnapshot = Names.named("FlightSnapshot");
+
     public GuiceModuleFsPrimeranksServer() {
     }
 
     @Override
     public void configure() {
-        bind(Dao.class).annotatedWith(Names.named("objectify.dao.User"))
+        bind(Dao.class).annotatedWith(UserName)
                 .to(DaoUser.class).in(Singleton.class);
-        bind(Dao.class).annotatedWith(Names.named("objectify.dao.Flight"))
+        bind(Dao.class).annotatedWith(FlightName)
                 .to(DaoFlight.class).in(Singleton.class);
-        bind(Dao.class).annotatedWith(Names.named("objectify.dao.FlightSnapshot"))
+        bind(Dao.class).annotatedWith(FlightSnapshot)
                 .to(DaoFlightSnapshot.class).in(Singleton.class);
     }
 }

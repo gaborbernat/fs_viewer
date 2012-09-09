@@ -17,6 +17,7 @@
 
 package net.primeranks.fs_server;
 
+import com.google.inject.Inject;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 import net.primeranks.fs_data.Flight;
@@ -37,7 +38,7 @@ public class ResourceFlight extends Resource_RESTInjectorProvider {
     @GET
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<Flight> getFlightsForUser(@QueryParam("userId") Long userId) {
-        List<Flight> u = daoFlight().findFlightsForUser(userId);
+        List<Flight> u = Dao.Flight().findFlightsForUser(userId);
         return u;
     }
 
@@ -50,7 +51,7 @@ public class ResourceFlight extends Resource_RESTInjectorProvider {
     @Produces({MediaType.TEXT_PLAIN})
     public String createFlight(JAXBElement<Flight> user) {
         Flight u = user.getValue();
-        u = daoFlight().createFlight(u);
+        u = Dao.Flight().createFlight(u);
         String i = (u == null) ? null : u.getId().toString();
         throwIfPreconditionFailedIfNull(i, "Null value found for the user", MediaType.TEXT_PLAIN_TYPE);
         return i;
@@ -63,7 +64,9 @@ public class ResourceFlight extends Resource_RESTInjectorProvider {
     @Path("snapshot/")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public void addSnapshotToFlight(JAXBElement<FlightSnapshot> s) {
-        FlightSnapshot x = daoFlightSnapshot().addFlightSnapshot(s.getValue());
+
+        DaoFlightSnapshot d = Dao.FlightSnapshot();
+        FlightSnapshot x = d.addFlightSnapshot(s.getValue());
         if (x == null)
             throw new WebApplicationException(500);
     }
@@ -73,7 +76,7 @@ public class ResourceFlight extends Resource_RESTInjectorProvider {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public List<FlightSnapshot> getSnapShot(@QueryParam("from") int from, @QueryParam("nr") int nr,
                                             @QueryParam("flightId") Long flightId) {
-        List<FlightSnapshot> x = daoFlightSnapshot().getSnapshots(flightId, from, nr);
+        List<FlightSnapshot> x = Dao.FlightSnapshot().getSnapshots(flightId, from, nr);
         return x;
     }
 
@@ -81,14 +84,6 @@ public class ResourceFlight extends Resource_RESTInjectorProvider {
     @Path("snapshot/count/")
     @Produces({MediaType.TEXT_PLAIN})
     public String getSnapShot(@QueryParam("flightId") Long flightId) {
-        return "" + daoFlightSnapshot().getSnapshotCount(flightId);
-    }
-
-    private DaoFlight daoFlight() {
-        return (DaoFlight) getInjectorInstance().getInstance(Key.get(Dao.class, Names.named("objectify.dao.Flight")));
-    }
-
-    private DaoFlightSnapshot daoFlightSnapshot() {
-        return (DaoFlightSnapshot) getInjectorInstance().getInstance(Key.get(Dao.class, Names.named("objectify.dao.FlightSnapshot")));
+        return "" + Dao.FlightSnapshot().getSnapshotCount(flightId);
     }
 }

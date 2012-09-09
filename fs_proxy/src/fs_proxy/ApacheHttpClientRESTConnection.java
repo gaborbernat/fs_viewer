@@ -146,7 +146,7 @@ public class ApacheHttpClientRESTConnection implements Dao {
                     + " " + c.getMessage());
         }
         if (Response.Status.fromStatusCode(resp.getStatus()).getFamily() != Response.Status.Family.SUCCESSFUL) {
-            log.log(Level.SEVERE, "Could not add flightSnapshot: " + f.toString());
+            log.log(Level.SEVERE, "Could not add flightSnapshot: \n" + resp.toString() + "\n" +  resp.getHeaders().toString()  +"\n" +  f.toString());
             return false;
         }
         return true;
