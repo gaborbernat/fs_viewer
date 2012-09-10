@@ -1,6 +1,6 @@
 /*
  * JSONUserParser.java ->
- * Copyright (C) 2012-05-10 Gábor Bernát
+ * Copyright (C) 2012-09-10 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -15,7 +15,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.primeranks.bme.fs_replay;
+package com.primeranks.bme.fs_replay.DAO;
 
 import net.primeranks.fs_data.User;
 import org.json.JSONArray;

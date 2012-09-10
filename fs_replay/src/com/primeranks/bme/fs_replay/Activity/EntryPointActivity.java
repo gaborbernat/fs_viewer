@@ -1,6 +1,6 @@
 /*
  * EntryPointActivity.java ->
- * Copyright (C) 2012-05-10 Gábor Bernát
+ * Copyright (C) 2012-09-10 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -15,7 +15,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.primeranks.bme.fs_replay;
+package com.primeranks.bme.fs_replay.Activity;
 
 import android.app.ListActivity;
 import android.content.IntentFilter;
@@ -28,6 +28,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.primeranks.bme.fs_replay.Adapter.UserAdapter;
+import com.primeranks.bme.fs_replay.Config;
+import com.primeranks.bme.fs_replay.ConnectionChangedBroadcastReceiver;
+import com.primeranks.bme.fs_replay.DAO.GetUserList;
+import com.primeranks.bme.fs_replay.R;
 import net.primeranks.fs_data.User;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.HttpRequestRetryHandler;

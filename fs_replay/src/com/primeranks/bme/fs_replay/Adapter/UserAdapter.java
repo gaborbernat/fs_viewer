@@ -1,6 +1,6 @@
 /*
  * UserAdapter.java ->
- * Copyright (C) 2012-05-10 Gábor Bernát
+ * Copyright (C) 2012-09-10 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -15,7 +15,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.primeranks.bme.fs_replay;
+package com.primeranks.bme.fs_replay.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import com.primeranks.bme.fs_replay.R;
 import net.primeranks.fs_data.User;
 
 import java.util.List;
