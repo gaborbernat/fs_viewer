@@ -17,6 +17,7 @@
 
 package com.primeranks.bme.fs_replay.DAO;
 
+import net.primeranks.fs_data.Flight;
 import net.primeranks.fs_data.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -55,9 +56,48 @@ public class JSONParser {
         for (int i = 0; i < json_list.length(); ++i) {
             JSONObject c = (JSONObject) json_list.get(i);
             User u = new User();
+
             u.setId(new Long(c.getInt("id")));
             u.setDomain(c.getString("domain"));
             u.setName(c.getString("name"));
+
+            l.add(u);
+        }
+        return l;
+    }
+
+    public static List<Flight> parseFlightList(InputStream json) throws Exception {
+
+        // The Android relies that the entire JSON object is in the memory already, read it into a buffer
+        BufferedReader reader = new BufferedReader(new InputStreamReader(json));
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            String line = reader.readLine();
+            while (line != null) {
+                sb.append(line);
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            throw e;
+        } finally {
+            reader.close();
+        }
+        JSONObject all = new JSONObject(sb.toString());
+        JSONArray json_list = (JSONArray) all.get("user");
+
+        List<Flight> l = new ArrayList<Flight>();
+
+        for (int i = 0; i < json_list.length(); ++i) {
+            JSONObject c = (JSONObject) json_list.get(i);
+
+            Flight u = new Flight();
+
+            u.setId(c.getLong("id"));
+            u.setEndDate(c.getLong("endDate"));
+            u.setStartDate(c.getLong("startDate"));
+            u.setUserId(c.getLong("userId"));
+
             l.add(u);
         }
         return l;

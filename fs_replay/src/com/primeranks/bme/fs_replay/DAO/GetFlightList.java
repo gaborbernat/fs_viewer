@@ -1,6 +1,6 @@
 /*
- * GetUserList.java ->
- * Copyright (C) 2012-09-10 Gábor Bernát
+ * GetFlightList.java ->
+ * Copyright (C) 2012-09-11 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -24,6 +24,7 @@ import com.primeranks.bme.fs_replay.Activity.SelectFromListActivity;
 import com.primeranks.bme.fs_replay.Config;
 import com.primeranks.bme.fs_replay.Network.Client;
 import com.primeranks.bme.fs_replay.R;
+import net.primeranks.fs_data.Flight;
 import net.primeranks.fs_data.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -33,13 +34,10 @@ import org.apache.http.client.methods.HttpGet;
 import java.io.InputStream;
 import java.util.List;
 
-/**
- * Get a list of users working. No parameter, no progress report and a list of users as answer.
- */
-public class GetUserList extends AsyncTask<Void, Void, List<User>> {
+public class GetFlightList extends AsyncTask<User, Void, List<Flight>> {
     private SelectFromListActivity a;
 
-    public GetUserList(SelectFromListActivity a) {
+    public GetFlightList(SelectFromListActivity a) {
         this.a = a;
     }
 
@@ -49,16 +47,18 @@ public class GetUserList extends AsyncTask<Void, Void, List<User>> {
     }
 
     @Override
-    protected List<User> doInBackground(Void... args) {
+    protected List<Flight> doInBackground(User... users) {
         try {
-            Log.d(Config.LOG_AS, "Start to request data from: " + Config.FS_USER_ENTRY);
+            if(users == null || users[0]==null) return null;
+            String uri = getUriForUser(users[0]);
+            Log.d(Config.LOG_AS, "Start to request data from: " + uri);
             HttpClient httpClient = Client.getHttpClient();
-            HttpGet request = new HttpGet(Config.FS_USER_ENTRY);
+            HttpGet request = new HttpGet(uri);
             HttpResponse response = httpClient.execute(request);
             if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
                 return null;
             InputStream data = response.getEntity().getContent();
-            return JSONParser.parseUserList(data);
+            return JSONParser.parseFlightList(data);
         } catch (Exception e) {
             Log.d(Config.LOG_AS, "Exception" + e.toString() + e.getMessage());
             e.printStackTrace();
@@ -66,15 +66,21 @@ public class GetUserList extends AsyncTask<Void, Void, List<User>> {
         }
     }
 
+    public String getUriForUser(User u)
+    {
+        //http://primeranksfs.appspot.com/rest/flight?userId=10009
+        return  String.format("%s?userId=%d", Config.FS_USER_ENTRY, u.getId());
+    }
+
     @Override
-    protected void onPostExecute(List<User> l) {
+    protected void onPostExecute(List<Flight> l) {
         if (l == null) {
             Toast.makeText(a, a.getString(R.string.errorGetUserList), Toast.LENGTH_LONG).show();
             return;
         }
         String t = a.getString(R.string.returnedUserCount, l.size());
         Toast.makeText(a, t, Toast.LENGTH_LONG).show();
-        a.setUserList(l);
+        a.setFlightList(l);
     }
 
 }

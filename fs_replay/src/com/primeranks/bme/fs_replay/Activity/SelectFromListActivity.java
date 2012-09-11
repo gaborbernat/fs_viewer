@@ -1,6 +1,6 @@
 /*
- * EntryPointActivity.java ->
- * Copyright (C) 2012-09-10 Gábor Bernát
+ * SelectFromListActivity.java ->
+ * Copyright (C) 2012-09-11 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -22,7 +22,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
+import com.primeranks.bme.fs_replay.Adapter.FlightAdapter;
 import com.primeranks.bme.fs_replay.Adapter.UserAdapter;
+import com.primeranks.bme.fs_replay.DAO.GetFlightList;
 import com.primeranks.bme.fs_replay.DAO.GetUserList;
 import com.primeranks.bme.fs_replay.R;
 import net.primeranks.fs_data.Flight;
@@ -39,7 +41,9 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
     enum Type {
         USER,
         FLIGHT
-    };
+    }
+
+    ;
 
     private final static String ThisActivityTypeString = "ThisActivityType";
     private final static String ThisUser = "ThisUser";
@@ -63,7 +67,7 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
 
         Intent i = getIntent();
         int t = i.getIntExtra(ThisActivityTypeString, -1);
-        _activityType = ( t == FLIGHT.ordinal()) ? FLIGHT : USER;
+        _activityType = (t == FLIGHT.ordinal()) ? FLIGHT : USER;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_list_core);
@@ -77,17 +81,16 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
         _backToTop_footer.setVisibility(View.INVISIBLE);
         listView.addFooterView(_backToTop_footer, null, false);
 
-        switch (_activityType)
-        {
-            case USER:
-            {
+        switch (_activityType) {
+            case USER: {
                 _userList = new ArrayList<User>();                   // Start with an empty one
                 _listDataBindAdapter = new UserAdapter(this, _userList);
                 break;
             }
-            case FLIGHT:
-            {
+            case FLIGHT: {
                 _userForFlight = (User) i.getSerializableExtra(ThisUser);
+                _flightList = new ArrayList<Flight>();
+                _listDataBindAdapter = new FlightAdapter(this, _flightList);
                 break;
             }
         }
@@ -109,8 +112,18 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
     public void setUserList(List<User> l) {
         _userList.clear();
         _userList.addAll(l);
+        ListUpdated(_userList.size());
+    }
+
+    public void setFlightList(List<Flight> l) {
+        _flightList.clear();
+        _flightList.addAll(l);
+        ListUpdated(_flightList.size());
+    }
+
+    public void ListUpdated(int l) {
         _listDataBindAdapter.notifyDataSetChanged();
-        if (l.size() < _showBackToTopAfter) {
+        if (l < _showBackToTopAfter) {
             _backToTop_footer.setVisibility(View.INVISIBLE);
         } else
             _backToTop_footer.setVisibility(View.VISIBLE);
@@ -119,15 +132,13 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
     @Override
     protected void onResume() {
         super.onResume();
-        switch (_activityType)
-        {
-            case USER:
-            {
+        switch (_activityType) {
+            case USER: {
                 new GetUserList(this).execute();
                 break;
             }
-            case FLIGHT:
-            {
+            case FLIGHT: {
+                new GetFlightList(this).execute(_userForFlight);
                 break;
             }
         }
@@ -137,11 +148,9 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        switch (_activityType)
-        {
-            case USER:
-            {
-                User u = ((UserAdapter)_listDataBindAdapter).getItem(position-1);
+        switch (_activityType) {
+            case USER: {
+                User u = ((UserAdapter) _listDataBindAdapter).getItem(position - 1);
                 // Navigate to the next selection screen
                 Toast.makeText(this, getString(R.string.userSelectedToastText) + u.toString(), Toast.LENGTH_LONG).show();
 
@@ -151,9 +160,8 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
                 startActivity(i);
                 break;
             }
-            case FLIGHT:
-            {
-                  break;
+            case FLIGHT: {
+                break;
             }
         }
     }

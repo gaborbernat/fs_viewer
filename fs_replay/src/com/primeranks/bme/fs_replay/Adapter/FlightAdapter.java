@@ -26,6 +26,9 @@ import android.widget.TextView;
 import com.primeranks.bme.fs_replay.R;
 import net.primeranks.fs_data.Flight;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class FlightAdapter extends ArrayAdapter<Flight> {
@@ -50,18 +53,27 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
 
         ViewHolder holder = (ViewHolder) convertView.getTag();
         if (holder == null) {
-            startDate = (TextView) convertView.findViewById(R.id.user);
-            endDate = (TextView) convertView.findViewById(R.id.domain);
+            startDate = (TextView) convertView.findViewById(R.id.startDate);
+            endDate = (TextView) convertView.findViewById(R.id.endDate);
+
+
 
             Flight f = getItem(position);      // Get the select_list_item_user data
             if (f != null) {
-                startDate.setText((int) f.getStartDate());
-                endDate.setText((int)f.getEndDate());
+                startDate.setText(getDate(f.getStartDate()));
+                endDate.setText( getDate(f.getEndDate()));
             }
             holder = new ViewHolder(startDate, endDate);
             convertView.setTag(holder);
         }
         return convertView;
+    }
+
+    private String getDate(Long date)
+    {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+        Date d = new Date(date);
+        return format.format(d);
     }
 
     private class ViewHolder {
