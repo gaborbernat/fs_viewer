@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ strings.xml ->
-  ~ Copyright (C) 2012-05-05 Gábor Bernát
+  ~ colors.xml ->
+  ~ Copyright (C) 2012-09-10 Gábor Bernát
   ~ Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
   ~
   ~ This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -17,14 +17,7 @@
   -->
 
 <resources>
-    <string name="app_name">FS Replay</string>
-    <string name="errorGetUserList">Error, could not get the user list!</string>
-    <string name="notifyStartGetUserList">Downloading user list from the server.</string>
-    <string name="noMoreHTTPRetry">Won\'t retry</string>
-    <string name="retryHTTPLog">Retrying request...</string>
-    <string name="userSelectedToastText">Getting flights... for</string>
-    <string name="returnedUserCount">Returned %1$d users from the server.</string>
-    <string name="BackToTop">Back to top</string>
-    <string name="name">Name</string>
-    <string name="domain">Domain</string><string name="BackToTopHint">Scrolls back to top</string>
+<color name="SelectFooterText">#123456</color>
+<color name="SelectItemColor">#FFFFFF</color>
+<color name="SelectHeaderBackgroundColor">#101010</color>
 </resources>

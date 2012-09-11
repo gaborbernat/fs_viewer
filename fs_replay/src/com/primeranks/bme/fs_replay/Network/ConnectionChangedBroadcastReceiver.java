@@ -15,7 +15,7 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.primeranks.bme.fs_replay;
+package com.primeranks.bme.fs_replay.Network;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -24,7 +24,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Proxy;
 import android.util.Log;
-import com.primeranks.bme.fs_replay.Activity.EntryPointActivity;
+import com.primeranks.bme.fs_replay.Config;
 import org.apache.http.HttpHost;
 import org.apache.http.conn.params.ConnRoutePNames;
 import org.apache.http.params.HttpParams;
@@ -32,13 +32,14 @@ import org.apache.http.params.HttpParams;
 public class ConnectionChangedBroadcastReceiver extends BroadcastReceiver {
 
     public void onReceive(Context context, Intent intent) {
+
         String info = intent.getStringExtra(ConnectivityManager.EXTRA_EXTRA_INFO);
         NetworkInfo nwInfo =
                 intent
                         .getParcelableExtra(ConnectivityManager.EXTRA_NETWORK_INFO);
         Log.d(Config.LOG_AS, info + ": " + nwInfo.getReason());
 
-        HttpParams httpParams = EntryPointActivity.getHttpClient().getParams();
+        HttpParams httpParams = Client.getHttpClient().getParams();
         if (nwInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
             String proxyHost = Proxy.getHost(context);
             if (proxyHost == null) {

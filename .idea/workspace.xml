@@ -1,16 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidDesignerProfile">
+    <option name="fullProfile">
+      <profile>
+        <option name="device" value="4in WVGA (Nexus S)" />
+        <option name="deviceConfiguration" value="Portrait" />
+        <option name="targetHashString" value="android-10" />
+        <option name="theme" value="Theme" />
+      </profile>
+    </option>
+    <option name="selection" value="[Full]" />
+  </component>
+  <component name="AndroidLayoutPreviewToolWindow">
+    <option name="state">
+      <GlobalState>
+        <option name="device" value="2.7in QVGA" />
+        <option name="dockMode" value="" />
+        <option name="nightMode" value="notnight" />
+        <option name="targetHashString" value="android-10" />
+        <option name="theme" value="Theme" />
+        <option name="visible" value="false" />
+      </GlobalState>
+    </option>
+  </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="WARN" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9317622f-2de8-4daa-84fd-3cd4806164f4" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fs_replay/res/layout/select_list_item_flight.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fs_replay/res/values/colors.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/FlightAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Network/Client.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/User.java" afterPath="$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fs_replay/AndroidManifest.xml" afterPath="$PROJECT_DIR$/fs_replay/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/ConnectionChangedBroadcastReceiver.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/ConnectionChangedBroadcastReceiver.java" />
-      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\src\com\primeranks\bme\fs_replay\EntryPointActivity.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Activity/EntryPointActivity.java" />
-      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\src\com\primeranks\bme\fs_replay\GetUserList.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/GetUserList.java" />
-      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\src\com\primeranks\bme\fs_replay\JSONUserParser.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/JSONUserParser.java" />
-      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\src\com\primeranks\bme\fs_replay\UserAdapter.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/UserAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fs_replay/res/values/strings.xml" afterPath="$PROJECT_DIR$/fs_replay/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/UserAdapter.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/UserAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/GetUserList.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/GetUserList.java" />
+      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\res\layout\entry_point.xml" afterPath="$PROJECT_DIR$/fs_replay/res/layout/select_list_core.xml" />
+      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\res\layout\user.xml" afterPath="$PROJECT_DIR$/fs_replay/res/layout/select_list_item_user.xml" />
+      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\res\layout\user_footer.xml" afterPath="$PROJECT_DIR$/fs_replay/res/layout/select_list_footer.xml" />
+      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\res\layout\user_header.xml" afterPath="$PROJECT_DIR$/fs_replay/res/layout/select_list_header_user.xml" />
+      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\src\com\primeranks\bme\fs_replay\Activity\EntryPointActivity.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Activity/SelectFromListActivity.java" />
+      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\src\com\primeranks\bme\fs_replay\ConnectionChangedBroadcastReceiver.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Network/ConnectionChangedBroadcastReceiver.java" />
+      <change type="MOVED" beforePath="D:\university\msc\summer\fs_viewer\fs_replay\src\com\primeranks\bme\fs_replay\DAO\JSONUserParser.java" afterPath="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/JSONParser.java" />
     </list>
     <ignored path="fs_viewer.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,22 +76,7 @@
   </component>
   <component name="DebuggerManager">
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/GetUserList.java" line="51" class="com.primeranks.bme.fs_replay.GetUserList" package="com.primeranks.bme.fs_replay">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -90,6 +109,7 @@
         <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
     </breakpoint_any>
+    <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -100,37 +120,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="GetUserList.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/GetUserList.java">
+      <file leaf-file-name="SelectFromListActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Activity/SelectFromListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="68" selection-start="2390" selection-end="2390" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="84" column="33" selection-start="3193" selection-end="3193" vertical-scroll-proportion="0.23273942">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ThreadPoolExecutor.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://D:/sdk/download/android/android-sdk/platforms/android-10/android.jar!/java/util/concurrent/ThreadPoolExecutor.class">
+      <file leaf-file-name="Flight.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/Flight.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="41" selection-start="1599" selection-end="1599" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ArrayList.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk1.6.0_34/src.zip!/java/util/ArrayList.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="256" column="0" selection-start="9525" selection-end="9525" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EntryPointActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Activity/EntryPointActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="169" column="12" selection-start="7696" selection-end="7696" vertical-scroll-proportion="0.0">
+            <state line="24" column="59" selection-start="1049" selection-end="1056" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -139,52 +143,30 @@
       <file leaf-file-name="UserAdapter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/UserAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="13" selection-start="1231" selection-end="1231" vertical-scroll-proportion="0.0">
+            <state line="33" column="52" selection-start="1260" selection-end="1287" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JSONUserParser.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/JSONUserParser.java">
+      <file leaf-file-name="FlightAdapter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/FlightAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="40" selection-start="1649" selection-end="1649" vertical-scroll-proportion="0.39310345">
-              <folding />
+            <state line="53" column="47" selection-start="2284" selection-end="2284" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AbstractHttpClient.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://D:/sdk/download/android/android-sdk/platforms/android-10/android.jar!/org/apache/http/impl/client/AbstractHttpClient.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="46" selection-start="7312" selection-end="7312" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
+      <file leaf-file-name="select_list_item_flight.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fs_replay/res/layout/select_list_item_flight.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Config.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Config.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="31" selection-start="1116" selection-end="1116" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConnectionChangedBroadcastReceiver.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/ConnectionChangedBroadcastReceiver.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="13" selection-start="1323" selection-end="1323" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ApacheHttpClientRESTConnection.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/fs_proxy/src/fs_proxy/ApacheHttpClientRESTConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="179" column="22" selection-start="7278" selection-end="7278" vertical-scroll-proportion="0.0">
+          <provider editor-type-id="text-editor">
+            <state line="24" column="37" selection-start="1237" selection-end="1237" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -210,22 +192,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/fs_proxy/src/fs_proxy/Main.java" />
-        <option value="$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/FlightSnapshot.java" />
-        <option value="$PROJECT_DIR$/fs_proxy/src/fs_proxy/ApacheHttpClientRESTConnection.java" />
-        <option value="$PROJECT_DIR$/fs_primeranks_server/src/net/primeranks/fs_server/GuiceModuleFsPrimeranksServer.java" />
-        <option value="$PROJECT_DIR$/fs_primeranks_server/src/net/primeranks/fs_server/ResourceFlight.java" />
-        <option value="$PROJECT_DIR$/fs_primeranks_server/src/net/primeranks/fs_server/Resource_RESTInjectorProvider.java" />
-        <option value="$PROJECT_DIR$/fs_primeranks_server/src/net/primeranks/fs_server/ResourceUser.java" />
-        <option value="$PROJECT_DIR$/fs_primeranks_server/src/net/primeranks/fs_server/Dao.java" />
-        <option value="$PROJECT_DIR$/fs_proxy/src/fs_proxy/Config.java" />
-        <option value="$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/Flight.java" />
-        <option value="$PROJECT_DIR$/fs_proxy/src/fs_proxy/FS_Proxy_Basic.java" />
-        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/EntryPointActivity.java" />
-        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/GetUserList.java" />
-        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/JSONUserParser.java" />
+        <option value="$PROJECT_DIR$/fs_replay/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/fs_replay/res/layout/select_list_header_user.xml" />
+        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Services/ConnectionChangedService.java" />
+        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Network/Client.java" />
+        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Network/ConnectionChangedBroadcastReceiver.java" />
+        <option value="$PROJECT_DIR$/fs_replay/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/GetUserList.java" />
-        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Activity/EntryPointActivity.java" />
+        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Config.java" />
+        <option value="$PROJECT_DIR$/fs_replay/res/layout/select_list_core.xml" />
+        <option value="$PROJECT_DIR$/fs_replay/res/layout/select_list_footer.xml" />
+        <option value="$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/User.java" />
+        <option value="$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/Base.java" />
+        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Activity/SelectFromListActivity.java" />
+        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/JSONUserParser.java" />
+        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/JSONParser.java" />
+        <option value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/FlightAdapter.java" />
       </list>
     </option>
   </component>
@@ -242,8 +224,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="79" />
+    <option name="y" value="-9" />
     <option name="width" value="1850" />
-    <option name="height" value="1092" />
+    <option name="height" value="1098" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -287,7 +270,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -329,14 +311,190 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Network" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DAO" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Adapter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Activity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gen" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_replay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_viewer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fs_data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="net.primeranks.fs_data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.09832842" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="GOOGLE_APP_ENGINE_ACCOUNT_EMAIL" value="gabor.bernat@primeranks.net" />
     <property name="Repository.Attach.JavaDocs" value="true" />
@@ -345,7 +503,6 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/jersey-guice/1.13/jersey-guice-1.13.jar!/" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Emulator" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
@@ -353,13 +510,22 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay" />
-    <property name="options.lastSelected" value="preferences.keymap" />
+    <property name="options.lastSelected" value="editor.preferences.completion" />
     <property name="project.structure.side.proportion" value="0.26761746" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="36328820D4BF00EC" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\university\msc\summer\fs_viewer\fs_replay\res\layout" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\university\msc\summer\fs_viewer\fs_replay\res\layout" />
+      <recent name="D:\university\msc\summer\fs_viewer\fs_replay\res\layout\list" />
+    </key>
   </component>
   <component name="RunManager" selected="Android Application.fs_replay">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -641,35 +807,38 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="79" y="0" width="1850" height="1092" extended-state="0" />
+    <frame x="79" y="-9" width="1850" height="1098" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297062" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6713514" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6713514" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6702938" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6702938" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24972005" sideWeight="0.6702938" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.57127315" sideWeight="0.49776036" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5654054" sideWeight="0.49776036" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297062" sideWeight="0.5027996" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.49832028" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6702938" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297062" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.49776036" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297062" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6702938" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39977604" sideWeight="0.6702938" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26203808" sideWeight="0.6702938" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297062" sideWeight="0.49328107" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26233184" sideWeight="0.6713514" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756758" sideWeight="0.49104142" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="DSM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="179" y="91" width="1650" height="892" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.6702938" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297062" sideWeight="0.4955207" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297062" sideWeight="0.47760358" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.47760358" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.7279652" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -731,109 +900,130 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/fs_proxy/src/fs_proxy/Config.java">
+    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Network/ConnectionChangedBroadcastReceiver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="21" selection-start="931" selection-end="931" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/Flight.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="26" selection-start="2369" selection-end="2369" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fs_proxy/src/fs_proxy/Dao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="1056" selection-end="1056" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fs_proxy/src/fs_proxy/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="30" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0">
+        <state line="47" column="59" selection-start="2064" selection-end="2064" vertical-scroll-proportion="0.6645469">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fs_proxy/src/fs_proxy/FsProxyModule.java">
+    <entry file="jar://D:/sdk/download/android/android-sdk/platforms/android-10/android.jar!/android/os/AsyncTask.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="35" selection-start="1135" selection-end="1135" vertical-scroll-proportion="0.0">
+        <state line="30" column="62" selection-start="1288" selection-end="1288" vertical-scroll-proportion="0.3314917" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="50" selection-start="1933" selection-end="1933" vertical-scroll-proportion="0.40200445">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fs_proxy/src/fs_proxy/FS_Proxy_Basic.java">
+    <entry file="file://$PROJECT_DIR$/fs_replay/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="32" selection-start="1481" selection-end="1481" vertical-scroll-proportion="0.0">
+        <state line="27" column="52" selection-start="1362" selection-end="1368" vertical-scroll-proportion="0.5712695">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/sdk/download/android/android-sdk/platforms/android-10/android.jar!/org/apache/http/impl/client/AbstractHttpClient.class">
+    <entry file="file://$PROJECT_DIR$/fs_replay/res/layout/select_list_footer.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="46" selection-start="7312" selection-end="7312" vertical-scroll-proportion="0.0">
+        <state line="24" column="38" selection-start="1205" selection-end="1214" vertical-scroll-proportion="0.5205479">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fs_proxy/src/fs_proxy/ApacheHttpClientRESTConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="179" column="22" selection-start="7278" selection-end="7278" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/fs_replay/res/layout/select_list_core.xml">
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
-    </entry>
-    <entry file="jar://D:/sdk/download/android/android-sdk/platforms/android-10/android.jar!/java/util/concurrent/ThreadPoolExecutor.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="41" selection-start="1599" selection-end="1599" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.6.0_34/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="256" column="0" selection-start="9525" selection-end="9525" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Activity/EntryPointActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="169" column="12" selection-start="7696" selection-end="7696" vertical-scroll-proportion="0.0">
+        <state line="26" column="48" selection-start="1260" selection-end="1260" vertical-scroll-proportion="0.56392694">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Config.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="31" selection-start="1116" selection-end="1116" vertical-scroll-proportion="0.0">
+        <state line="23" column="11" selection-start="1149" selection-end="1149" vertical-scroll-proportion="0.16926503">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/ConnectionChangedBroadcastReceiver.java">
+    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Network/Client.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="13" selection-start="1323" selection-end="1323" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="49" column="4" selection-start="2125" selection-end="2125" vertical-scroll-proportion="0.22048998">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/UserAdapter.java">
+    <entry file="file://$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/FlightSnapshot.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="13" selection-start="1231" selection-end="1231" vertical-scroll-proportion="0.0">
+        <state line="30" column="13" selection-start="1289" selection-end="1289" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/GetUserList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="68" selection-start="2390" selection-end="2390" vertical-scroll-proportion="0.0">
+        <state line="60" column="19" selection-start="2408" selection-end="2408" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/JSONUserParser.java">
+    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/DAO/JSONParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="40" selection-start="1649" selection-end="1649" vertical-scroll-proportion="0.39310345">
+        <state line="30" column="23" selection-start="1161" selection-end="1161" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#1930#1936#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/UserAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="52" selection-start="1260" selection-end="1287" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Adapter/FlightAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="47" selection-start="2284" selection-end="2284" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fs_replay/res/layout/select_list_item_flight.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state line="24" column="37" selection-start="1237" selection-end="1237" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fs_data/src/net.primeranks.fs_data/Flight.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="59" selection-start="1049" selection-end="1056" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fs_replay/src/com/primeranks/bme/fs_replay/Activity/SelectFromListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="33" selection-start="3193" selection-end="3193" vertical-scroll-proportion="0.23273942">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -28,9 +28,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSONUserParser {
+public class JSONParser {
 
-    public static List<User> parseData(InputStream json) throws Exception {
+    public static List<User> parseUserList(InputStream json) throws Exception {
 
         // The Android relies that the entire JSON object is in the memory already, read it into a buffer
         BufferedReader reader = new BufferedReader(new InputStreamReader(json));

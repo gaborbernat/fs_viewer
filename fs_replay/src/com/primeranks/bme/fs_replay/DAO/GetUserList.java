@@ -20,11 +20,13 @@ package com.primeranks.bme.fs_replay.DAO;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
-import com.primeranks.bme.fs_replay.Activity.EntryPointActivity;
+import com.primeranks.bme.fs_replay.Activity.SelectFromListActivity;
 import com.primeranks.bme.fs_replay.Config;
+import com.primeranks.bme.fs_replay.Network.Client;
 import com.primeranks.bme.fs_replay.R;
 import net.primeranks.fs_data.User;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 
@@ -35,9 +37,9 @@ import java.util.List;
  * Get a list of users working. No parameter, no progress report and a list of users as answer.
  */
 public class GetUserList extends AsyncTask<Void, Void, List<User>> {
-    private EntryPointActivity a;
+    private SelectFromListActivity a;
 
-    public GetUserList(EntryPointActivity a) {
+    public GetUserList(SelectFromListActivity a) {
         this.a = a;
     }
 
@@ -50,11 +52,13 @@ public class GetUserList extends AsyncTask<Void, Void, List<User>> {
     protected List<User> doInBackground(Void... args) {
         try {
             Log.d(Config.LOG_AS, "Start to request data from: " + Config.FS_USER_ENTRY);
-            HttpClient httpClient = EntryPointActivity.getHttpClient();
+            HttpClient httpClient = Client.getHttpClient();
             HttpGet request = new HttpGet(Config.FS_USER_ENTRY);
             HttpResponse response = httpClient.execute(request);
+            if(response.getStatusLine().getStatusCode() != HttpStatus.SC_OK)
+                return null;
             InputStream data = response.getEntity().getContent();
-            return JSONUserParser.parseData(data);
+            return JSONParser.parseUserList(data);
         } catch (Exception e) {
             Log.d(Config.LOG_AS, "Exception" + e.toString() + e.getMessage());
             e.printStackTrace();

@@ -22,12 +22,13 @@ import com.googlecode.objectify.annotation.Indexed;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 
 @XmlRootElement(name = "user")  // For the transport protocol
 @Entity(name = "user")          // For the storage
 @Indexed                        // For the storage -> Make an index for all the fields unless specified not to
-public class User {
+public class User implements Serializable {
     public final static Long INVALID_ID = null;
     @Id
     private Long id;

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <!--
-  ~ entry_point.xml ->
-  ~ Copyright (C) 2012-05-05 Gábor Bernát
+  ~ select_list_footer.xmlter.xml ->
+  ~ Copyright (C) 2012-09-10 Gábor Bernát
   ~ Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
   ~
   ~ This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -16,15 +17,13 @@
   ~ If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-    <ListView
-            android:id="@android:id/list"
+    <Button   xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            />
-</LinearLayout>
-
+            android:gravity="center_vertical|center_horizontal"
+            android:text="@string/BackToTop"
+            android:onClick="backToTop"
+            android:id="@+id/select_list_footer_button" android:padding="0dp" android:paddingLeft="0dp"
+            android:paddingTop="0dp" android:paddingRight="0dp" android:paddingBottom="0dp" android:maxHeight="10dp"
+            android:textColor="@color/SelectFooterText" android:hint="@string/BackToTopHint" android:typeface="serif"
+            android:textStyle="bold" android:textSize="24dp" android:singleLine="false"/>

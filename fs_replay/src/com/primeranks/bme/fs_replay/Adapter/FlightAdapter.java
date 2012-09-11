@@ -1,6 +1,6 @@
 /*
- * UserAdapter.java ->
- * Copyright (C) 2012-09-10 Gábor Bernát
+ * FlightAdapter.java ->
+ * Copyright (C) 2012-09-11 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -24,16 +24,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import com.primeranks.bme.fs_replay.R;
-import net.primeranks.fs_data.User;
+import net.primeranks.fs_data.Flight;
 
 import java.util.List;
 
-/**
- * Handles the local copy of the select_list_item_user list
- */
-public class UserAdapter extends ArrayAdapter<User> {
+public class FlightAdapter extends ArrayAdapter<Flight> {
 
-    public UserAdapter(Context context, List<User> u) {  // The custom adapter extends the default one
+
+    public FlightAdapter(Context context, List<Flight> u) {  // The custom adapter extends the default one
         super(context,                     // - Use the same context
                 R.layout.select_list_item_user,             // - With the select_list_item_user layout
                 u);                        // - With the given select_list_item_user list
@@ -47,32 +45,32 @@ public class UserAdapter extends ArrayAdapter<User> {
             convertView = inflater.inflate(R.layout.select_list_item_user, parent, false);
         }
 
-        TextView userName;
-        TextView userDomain;
+        TextView startDate;
+        TextView endDate;
 
         ViewHolder holder = (ViewHolder) convertView.getTag();
         if (holder == null) {
-            userName = (TextView) convertView.findViewById(R.id.user);
-            userDomain = (TextView) convertView.findViewById(R.id.domain);
+            startDate = (TextView) convertView.findViewById(R.id.user);
+            endDate = (TextView) convertView.findViewById(R.id.domain);
 
-            User user = getItem(position);      // Get the select_list_item_user data
-            if (user != null) {
-                userName.setText(user.getName());
-                userDomain.setText(user.getDomain());
+            Flight f = getItem(position);      // Get the select_list_item_user data
+            if (f != null) {
+                startDate.setText((int) f.getStartDate());
+                endDate.setText((int)f.getEndDate());
             }
-            holder = new ViewHolder(userName, userDomain);
+            holder = new ViewHolder(startDate, endDate);
             convertView.setTag(holder);
         }
         return convertView;
     }
 
     private class ViewHolder {
-        protected final TextView name;
-        protected final TextView domain;
+        protected final TextView startDate;
+        protected final TextView endDate;
 
-        public ViewHolder(TextView name, TextView domain) {
-            this.name = name;
-            this.domain = domain;
+        public ViewHolder(TextView startDate, TextView endDate) {
+            this.startDate = startDate;
+            this.endDate = endDate;
         }
     }
 }
