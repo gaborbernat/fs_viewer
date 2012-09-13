@@ -18,9 +18,10 @@
 package com.primeranks.bme.fs_replay;
 
 public final class Config {
-    public static final String FS_PRIMERANKS_API_REST_ENDPOINT = "http://primeranksfs.appspot.com/rest/";
-    public static final String FS_USER_ENTRY = FS_PRIMERANKS_API_REST_ENDPOINT + "user";
-    public static final String FS_FLIGHT_ENTRY = FS_PRIMERANKS_API_REST_ENDPOINT + "flight";
+    public static final String FS_PRIMERANKS_API_REST_ENDPOINT = "http://primeranksfs.appspot.com/rest";
+    public static final String FS_USER_ENTRY = FS_PRIMERANKS_API_REST_ENDPOINT + "/user";
+   public static final String FS_FLIGHT_ENTRY = FS_PRIMERANKS_API_REST_ENDPOINT + "/flight";
+    public static final String FS_FLIGHT_SNAPSHOT_ENTRY = FS_FLIGHT_ENTRY + "/snapshot";
     public static final String LOG_AS = "FS Replay";
     public static final String IDENTIFY_CLIENT_AS = LOG_AS + "/1.0";
 }

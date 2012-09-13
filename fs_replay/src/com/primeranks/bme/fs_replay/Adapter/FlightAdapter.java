@@ -23,8 +23,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import com.primeranks.bme.fs_replay.Data_Pojo.Flight;
 import com.primeranks.bme.fs_replay.R;
-import net.primeranks.fs_data.Flight;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -45,7 +45,7 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
         // Use the layout inflater to allow handling long lists
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.select_list_item_user, parent, false);
+            convertView = inflater.inflate(R.layout.select_list_item_flight, parent, false);
         }
 
         TextView startDate;
@@ -61,7 +61,11 @@ public class FlightAdapter extends ArrayAdapter<Flight> {
             Flight f = getItem(position);      // Get the select_list_item_user data
             if (f != null) {
                 startDate.setText(getDate(f.getStartDate()));
-                endDate.setText( getDate(f.getEndDate()));
+                Long eD = f.getEndDate();
+
+
+                String x = eD == 0 ? getContext().getString(R.string.liveText): getDate(eD);
+                endDate.setText(x );
             }
             holder = new ViewHolder(startDate, endDate);
             convertView.setTag(holder);

@@ -57,7 +57,7 @@ public class Dao extends DAOBase {
         DaoFlight D = (DaoFlight)getInjectorInstance().getInstance(Key.get(Dao.class, GuiceModuleFsPrimeranksServer.FlightName));
         if (D == null)
             java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "Could not create Flight DAO.");
-        return (DaoFlight) D;
+        return D;
     }
 
     protected DaoFlightSnapshot FlightSnapshot() {
@@ -71,6 +71,6 @@ public class Dao extends DAOBase {
         DaoUser D = (DaoUser) getInjectorInstance().getInstance(Key.get(Dao.class, GuiceModuleFsPrimeranksServer.UserName));
         if (D == null)
             java.util.logging.Logger.getAnonymousLogger().log(Level.SEVERE, "Could not create Flight User DAO.");
-        return (DaoUser) D;
+        return D;
     }
 }

@@ -45,12 +45,12 @@ public class FlightSnapshot {
     protected String aircraftCode;
 
     // Position and orientation
-    protected double latitude;
-    protected double longitude;
-    protected double heading;
-    protected double altitude;
+    protected Double latitude;
+    protected Double longitude;
+    protected Double heading;
+    protected Double altitude;
     // Speed
-    protected double verticalSpeed;
+    protected Double verticalSpeed;
 
     public static FlightSnapshot DEFAULT = Builder.DEFAULT.build();
     public static FlightSnapshot OFFSET = Builder.OFFSET.build();
@@ -70,8 +70,8 @@ public class FlightSnapshot {
     }
 
     private void setValues(Long id, Long flightId, long simulationTimeStamp, long measurementTimeStamp, String aircraftTypeName,
-                           String aircraftCode, double latitude, double longitude,
-                           double heading, double altitude, double verticalSpeed) {
+                           String aircraftCode, Double latitude, Double longitude,
+                           Double heading, Double altitude, Double verticalSpeed) {
         this.id = id;
         this.flightId = flightId;
         this.simulationTimeStamp = simulationTimeStamp;
@@ -255,43 +255,43 @@ public class FlightSnapshot {
         this.aircraftCode = aircraftCode;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public double getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public double getHeading() {
+    public Double getHeading() {
         return heading;
     }
 
-    public void setHeading(double heading) {
+    public void setHeading(Double heading) {
         this.heading = heading;
     }
 
-    public double getAltitude() {
+    public Double getAltitude() {
         return altitude;
     }
 
-    public void setAltitude(double altitude) {
+    public void setAltitude(Double altitude) {
         this.altitude = altitude;
     }
 
-    public double getVerticalSpeed() {
+    public Double getVerticalSpeed() {
         return verticalSpeed;
     }
 
-    public void setVerticalSpeed(double verticalSpeed) {
+    public void setVerticalSpeed(Double verticalSpeed) {
         this.verticalSpeed = verticalSpeed;
     }
 
@@ -321,8 +321,8 @@ public class FlightSnapshot {
             OFFSET.latitude = 1E-3;
             OFFSET.longitude = 1E-3;
             OFFSET.heading = 1E-1;
-            OFFSET.altitude = 1;
-            DEFAULT.verticalSpeed = 1;
+            OFFSET.altitude = 1.0;
+            DEFAULT.verticalSpeed = 1.0;
         }
 
         public Long id;
@@ -336,13 +336,13 @@ public class FlightSnapshot {
         private String aircraftCode;
 
         // Position and orientation
-        private double latitude;
-        private double longitude;
-        private double heading;
-        private double altitude;
+        private Double latitude;
+        private Double longitude;
+        private Double heading;
+        private Double altitude;
 
         // Speed
-        private double verticalSpeed;
+        private Double verticalSpeed;
 
         public Builder() {
             id = DEFAULT.id;
@@ -381,27 +381,27 @@ public class FlightSnapshot {
             return this;
         }
 
-        public Builder latitude(double latitude) {
+        public Builder latitude(Double latitude) {
             this.latitude = latitude;
             return this;
         }
 
-        public Builder heading(double heading) {
+        public Builder heading(Double heading) {
             this.heading = heading;
             return this;
         }
 
-        public Builder altitude(double altitude) {
+        public Builder altitude(Double altitude) {
             this.altitude = altitude;
             return this;
         }
 
-        public Builder longitude(double longitude) {
+        public Builder longitude(Double longitude) {
             this.longitude = longitude;
             return this;
         }
 
-        public Builder verticalSpeed(double verticalSpeed) {
+        public Builder verticalSpeed(Double verticalSpeed) {
             this.verticalSpeed = verticalSpeed;
             return this;
         }

@@ -175,11 +175,11 @@ public class FS_Proxy_Basic implements FS_Proxy_I {
                 .simulationTimeStamp(simulationTimeStamp)
                 .aircraftTypeName((String) readFromGeneral(FSInformation.AIRCRAFT_TYPE_NAME))
                 .aircraftCode((String) readFromGeneral(FSInformation.AIRCRAFT_CODE))
-                .altitude(aircraft.Altitude())
+                .altitude((double) aircraft.Altitude())
                 .heading(p)
                 .longitude(aircraft.Longitude())
                 .latitude(aircraft.Latitude())
-                .verticalSpeed(aircraft.VerticalSpeed())
+                .verticalSpeed((double)aircraft.VerticalSpeed())
                 .build();
     }
 

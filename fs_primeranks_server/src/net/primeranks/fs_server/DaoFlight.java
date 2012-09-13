@@ -50,7 +50,7 @@ public class DaoFlight extends Dao {
         List<Flight> r = new ArrayList<Flight>();
         Query<Flight> q = ofy().query(Flight.class);
         if (userId != null)
-            q = q.filter("userId", userId.toString());
+            q = q.filter("userId", userId);
         Iterable<Flight> tbl = q.fetch();
 
         for (Flight p : tbl) {

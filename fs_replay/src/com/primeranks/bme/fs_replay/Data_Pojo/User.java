@@ -1,6 +1,6 @@
 /*
  * User.java ->
- * Copyright (C) 2012-05-07 Gábor Bernát
+ * Copyright (C) 2012-09-11 Gábor Bernát
  * Created at: [Budapest University of Technology and Economics - Deparment of Automation and Applied Informatics]
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -15,21 +15,12 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.primeranks.fs_data;
+package com.primeranks.bme.fs_replay.Data_Pojo;
 
-import com.googlecode.objectify.annotation.Indexed;
+import java.io.Serializable;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.xml.bind.annotation.XmlRootElement;
-
-
-@XmlRootElement(name = "user")  // For the transport protocol
-@Entity(name = "user")          // For the storage
-@Indexed                        // For the storage -> Make an index for all the fields unless specified not to
-public class User{
+public class User implements Serializable {
     public final static Long INVALID_ID = null;
-    @Id
     private Long id;
     // The username.
     private String name;

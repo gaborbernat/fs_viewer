@@ -19,12 +19,11 @@ package com.primeranks.bme.fs_replay.DAO;
 
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 import com.primeranks.bme.fs_replay.Activity.SelectFromListActivity;
 import com.primeranks.bme.fs_replay.Config;
+import com.primeranks.bme.fs_replay.Data_Pojo.User;
 import com.primeranks.bme.fs_replay.Network.Client;
-import com.primeranks.bme.fs_replay.R;
-import net.primeranks.fs_data.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
@@ -45,7 +44,7 @@ public class GetUserList extends AsyncTask<Void, Void, List<User>> {
 
     @Override
     protected void onPreExecute() {
-        Toast.makeText(a, a.getString(R.string.notifyStartGetUserList), Toast.LENGTH_SHORT).show();
+        a.progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -68,12 +67,7 @@ public class GetUserList extends AsyncTask<Void, Void, List<User>> {
 
     @Override
     protected void onPostExecute(List<User> l) {
-        if (l == null) {
-            Toast.makeText(a, a.getString(R.string.errorGetUserList), Toast.LENGTH_LONG).show();
-            return;
-        }
-        String t = a.getString(R.string.returnedUserCount, l.size());
-        Toast.makeText(a, t, Toast.LENGTH_LONG).show();
+        a.progressBar.setVisibility(View.GONE);
         a.setUserList(l);
     }
 

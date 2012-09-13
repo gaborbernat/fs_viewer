@@ -26,9 +26,9 @@ import com.primeranks.bme.fs_replay.Adapter.FlightAdapter;
 import com.primeranks.bme.fs_replay.Adapter.UserAdapter;
 import com.primeranks.bme.fs_replay.DAO.GetFlightList;
 import com.primeranks.bme.fs_replay.DAO.GetUserList;
+import com.primeranks.bme.fs_replay.Data_Pojo.Flight;
+import com.primeranks.bme.fs_replay.Data_Pojo.User;
 import com.primeranks.bme.fs_replay.R;
-import net.primeranks.fs_data.Flight;
-import net.primeranks.fs_data.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +43,10 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
         FLIGHT
     }
 
-    ;
-
     private final static String ThisActivityTypeString = "ThisActivityType";
     private final static String ThisUser = "ThisUser";
+    public final static String FlightString = "Flight";
+
     private Type _activityType;
 
     private User _userForFlight;
@@ -57,8 +57,7 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
     private List<Flight> _flightList;
 
     private Button _backToTop_footer;
-    private final int _showBackToTopAfter = 5;
-    private View _headerUser;
+    public ProgressBar progressBar;
 
     /*
      Set up the creation of the Activity
@@ -71,6 +70,9 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_list_core);
+
+        progressBar = (ProgressBar) findViewById(R.id.ProgressBar);
+
         ListView listView = getListView();
         listView.setOnItemClickListener(this);
 
@@ -95,11 +97,21 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
             }
         }
 
-        _headerUser = getLayoutInflater().inflate(R.layout.select_list_header_user, null);
+        View _headerUser = getLayoutInflater().inflate(R.layout.select_list_header_user, null);
         listView.addHeaderView(_headerUser, null, false);
         listView.setAdapter(_listDataBindAdapter);
         listView.setItemsCanFocus(false);
 
+        switch (_activityType) {
+            case USER: {
+                new GetUserList(this).execute();
+                break;
+            }
+            case FLIGHT: {
+                new GetFlightList(this).execute(_userForFlight);
+                break;
+            }
+        }
     }
 
     /*
@@ -111,18 +123,21 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
 
     public void setUserList(List<User> l) {
         _userList.clear();
+        if(l != null)
         _userList.addAll(l);
         ListUpdated(_userList.size());
     }
 
     public void setFlightList(List<Flight> l) {
         _flightList.clear();
+        if( l != null)
         _flightList.addAll(l);
         ListUpdated(_flightList.size());
     }
 
     public void ListUpdated(int l) {
         _listDataBindAdapter.notifyDataSetChanged();
+        int _showBackToTopAfter = 7;
         if (l < _showBackToTopAfter) {
             _backToTop_footer.setVisibility(View.INVISIBLE);
         } else
@@ -132,17 +147,6 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
     @Override
     protected void onResume() {
         super.onResume();
-        switch (_activityType) {
-            case USER: {
-                new GetUserList(this).execute();
-                break;
-            }
-            case FLIGHT: {
-                new GetFlightList(this).execute(_userForFlight);
-                break;
-            }
-        }
-
     }
 
 
@@ -151,9 +155,6 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
         switch (_activityType) {
             case USER: {
                 User u = ((UserAdapter) _listDataBindAdapter).getItem(position - 1);
-                // Navigate to the next selection screen
-                Toast.makeText(this, getString(R.string.userSelectedToastText) + u.toString(), Toast.LENGTH_LONG).show();
-
                 Intent i = new Intent(SelectFromListActivity.this, SelectFromListActivity.class);
                 i.putExtra(ThisActivityTypeString, FLIGHT.ordinal());
                 i.putExtra(ThisUser, u);
@@ -161,6 +162,11 @@ public class SelectFromListActivity extends ListActivity implements AdapterView.
                 break;
             }
             case FLIGHT: {
+                Flight f = ((FlightAdapter) _listDataBindAdapter).getItem(position - 1);
+                //new GoogleMapsDrawPath();
+                Intent i = new Intent(this, GoogleMaps.class);
+                i.putExtra(FlightString, f);
+                startActivity(i);
                 break;
             }
         }
