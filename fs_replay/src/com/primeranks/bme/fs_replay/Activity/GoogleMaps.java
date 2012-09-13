@@ -37,7 +37,6 @@ public class GoogleMaps extends MapActivity {
         _view.setBuiltInZoomControls(true);//Enabling the built-in Zoom Controls
 
         _mc = _view.getController();
-        _projection = _view.getProjection();
         /*
       Called when the activity is first created.
      */
@@ -53,7 +52,7 @@ public class GoogleMaps extends MapActivity {
         {
             FlightSnapshot f = _path.get(0);
             _mc.setCenter(new GeoPoint((int) (f.getLatitude() * 1e6), (int) (f.getLongitude() * 1e6)));
-            _mc.setZoom(19);
+            _mc.setZoom(13);
         }
         _view.postInvalidate();
     }
@@ -73,11 +72,10 @@ public class GoogleMaps extends MapActivity {
         redrawMap(true);
     }
 
-    public static Paint MapLineStyle;
+    public static Paint MapLineStyle = new Paint();
 
     static {
         //Configuring the paint brush
-        MapLineStyle = new Paint();
         MapLineStyle.setDither(true);
         MapLineStyle.setColor(Color.RED);
         MapLineStyle.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -87,16 +85,18 @@ public class GoogleMaps extends MapActivity {
     }
 
     class PathOverlay extends Overlay {
-        private Path path = new Path();
+        private Path path;
 
         public void draw(Canvas canvas, MapView mV, boolean shadow) {
             super.draw(canvas, mV, shadow);
             if(_path == null)
                 return;
             if (drawAll) {
+                path = new Path();
+                _projection = _view.getProjection();
                 Point p = null, c = null;
                 for (FlightSnapshot f : _path) {
-                    _projection.toPixels(new GeoPoint((int) (f.getLatitude() * 1e6), (int) (f.getLongitude() * 1e6)), c);
+                    c = _projection.toPixels(new GeoPoint((int) (f.getLatitude() * 1e6), (int) (f.getLongitude() * 1e6)), null);
                     if (p == null) {
                         if (c != null) {
                             p = c;

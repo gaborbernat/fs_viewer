@@ -59,6 +59,7 @@ public class GetFlightSnapshots extends AsyncTask<Flight, Void, List<FlightSnaps
                 return null;
             InputStream data = response.getEntity().getContent();
             return JSONParser.parseFlightSnapshotList(data);
+
         } catch (Exception e) {
             Log.d(Config.LOG_AS, "Exception" + e.toString() + e.getMessage());
             e.printStackTrace();
